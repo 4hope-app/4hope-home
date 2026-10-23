@@ -1,0 +1,9 @@
+.next/
+.open-next/
+.wrangler/
+node_modules/
+public/design-system/
+design-system/
+src/styles/tokens.css
+package-lock.json
+next-env.d.ts

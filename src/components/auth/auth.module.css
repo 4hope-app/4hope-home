@@ -1,0 +1,90 @@
+/* Shared pieces of the auth screens. */
+.legal {
+  margin-top: var(--space-600);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-arena-muted);
+}
+.legal a {
+  color: var(--text-arena);
+}
+.google {
+  gap: var(--space-300) !important;
+  background: #fff !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #1f1f1f !important;
+}
+.google:hover:not(:disabled) {
+  background: #f1f3f4 !important;
+}
+.error {
+  margin-top: var(--space-400);
+  font-size: 13px;
+  text-align: center;
+  color: var(--text-danger-default);
+}
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-300);
+  min-height: 120px;
+  font-size: 14px;
+  color: var(--text-arena-muted);
+}
+.account {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+  margin-bottom: var(--space-600);
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.accountText {
+  min-width: 0;
+}
+.accountName,
+.accountEmail {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.accountName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-arena);
+}
+.accountEmail {
+  font-size: 13px;
+  color: var(--text-arena-muted);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+.submit {
+  margin-top: var(--space-100);
+}
+.switch {
+  margin-top: var(--space-600);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-arena-muted);
+}
+.linkButton {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--gold-500);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.success {
+  font-size: 13px;
+  color: var(--text-arena-muted);
+}

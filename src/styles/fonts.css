@@ -1,0 +1,45 @@
+/* Self-hosted webfonts (SIL OFL 1.1 — see public/fonts/licenses).
+   Latin subset covers Spanish and English. Family names match the design system stacks. */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-latin-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-latin-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/roboto-mono-latin-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/roboto-mono-latin-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('/fonts/roboto-mono-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TT Bluescreens Trial (hero wordmark only) is declared in tokens.css from tokens.json.
+   TODO: confirm the TT Bluescreens license before production — the file is a trial build. */

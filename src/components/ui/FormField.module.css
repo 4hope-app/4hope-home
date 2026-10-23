@@ -1,0 +1,26 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-default-secondary);
+}
+.required {
+  margin-left: 4px;
+  color: var(--red-500);
+}
+.hint,
+.error {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-default-secondary);
+}
+.error {
+  color: var(--text-danger-default);
+}

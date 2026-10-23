@@ -1,0 +1,91 @@
+.discord {
+  margin-top: var(--space-200);
+  font-size: 15px;
+}
+.discord a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-100);
+  color: var(--text-arena);
+  text-decoration: none;
+}
+.discord a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.discordIcon {
+  color: var(--gold-500);
+}
+.topics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.item {
+  display: flex;
+  min-width: 0;
+}
+.card {
+  flex: 1;
+  gap: var(--space-200);
+}
+.card h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-200);
+  margin-top: auto;
+  padding-top: var(--space-400);
+  color: var(--gold-500);
+  text-transform: uppercase;
+}
+.cta svg {
+  transition: transform 140ms ease;
+}
+.card:hover .cta svg {
+  transform: translateX(3px);
+}
+.direct {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-300) var(--space-400);
+  margin-top: var(--space-1200);
+}
+.mailIcon {
+  color: var(--text-arena-muted);
+}
+.address {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-arena);
+}
+.copy {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-150);
+  height: 32px;
+  padding: 0 var(--space-300);
+  border: 0;
+  border-radius: var(--radius-200);
+  background: var(--ink-700);
+  color: var(--text-arena);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+.copy:hover {
+  background: var(--ink-600);
+}
+.replies {
+  color: var(--text-arena-muted);
+  text-transform: uppercase;
+}

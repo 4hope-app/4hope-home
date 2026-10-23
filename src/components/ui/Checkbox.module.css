@@ -1,0 +1,49 @@
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border: 1.5px solid var(--border-default-secondary);
+  background: var(--background-default-default);
+  color: var(--ink-1000);
+  transition: all 120ms ease;
+}
+.box svg {
+  visibility: hidden;
+}
+.native:checked + .box {
+  border-color: var(--gold-500);
+  background: var(--gold-500);
+}
+.native:checked + .box svg {
+  visibility: visible;
+}
+.native:focus-visible + .box {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-focus);
+}
+.native:disabled + .box,
+.native:disabled ~ .label {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.label {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text-default-default);
+}
+.label a {
+  color: var(--gold-500);
+}

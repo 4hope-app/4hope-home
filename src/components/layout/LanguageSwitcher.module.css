@@ -1,0 +1,27 @@
+.lang {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background: var(--ink-800);
+  border: 1px solid var(--surface-arena-line);
+}
+.lang a {
+  min-width: 36px;
+  padding: 5px 9px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-arena-muted);
+}
+.lang a:hover {
+  color: var(--text-arena);
+}
+.lang a[aria-current='true'] {
+  background: var(--ink-600);
+  color: var(--text-arena);
+}

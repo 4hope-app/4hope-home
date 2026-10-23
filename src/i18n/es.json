@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "title": "4HOPE — Herramientas para la comunidad de TFT en LATAM",
+    "description": "4HOPE crea herramientas para que jugar, organizar y competir en Teamfight Tactics sea más fácil. Empieza con TFT Competition Bracket. Hecho en LATAM, para LATAM.",
+    "ogAlt": "4HOPE — Herramientas para TFT LATAM",
+    "locale": "es_419"
+  },
+  "a11y": {
+    "skip": "Saltar al contenido",
+    "mainNav": "Navegación principal",
+    "footerNav": "Navegación del pie de página",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "newTab": "(se abre en una pestaña nueva)",
+    "language": "Idioma"
+  },
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "teams": "Equipos",
+    "community": "Comunidad",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "kicker": "// Herramientas para TFT LATAM",
+    "headline": "Juega en serio. Organiza mejor.",
+    "sub": "4HOPE crea herramientas para que jugar, organizar y competir en TFT sea más fácil. Hecho en LATAM, para LATAM.",
+    "primary": "Crear bracket",
+    "secondary": "Unirme al Discord"
+  },
+  "whatIs": {
+    "kicker": "// Qué es 4HOPE",
+    "title": "Una plataforma hecha por jugadores",
+    "lead": "4HOPE es una plataforma de LATAM que construye herramientas para Teamfight Tactics y su comunidad. Arrancamos con un bracket para organizar torneos en minutos. Vienen más herramientas, eventos y un equipo competitivo.",
+    "points": [
+      {
+        "icon": "Globe",
+        "title": "Hecho para LATAM",
+        "body": "Pensado para nuestros servidores, horarios y comunidad. En español primero."
+      },
+      {
+        "icon": "Gift",
+        "title": "Gratis para la comunidad",
+        "body": "Las herramientas son gratuitas. Úsalas para tus torneos, scrims y ligas."
+      },
+      {
+        "icon": "Users",
+        "title": "Hecho por jugadores",
+        "body": "Jugamos TFT. Construimos lo que nos hacía falta para organizar y competir."
+      }
+    ]
+  },
+  "tools": {
+    "kicker": "// Herramientas",
+    "title": "Tus herramientas para TFT",
+    "lead": "Una sola marca, varias herramientas. Cada una vive en su propio subdominio de 4hope.app.",
+    "live": "Live",
+    "soon": "Pronto",
+    "open": "Abrir herramienta",
+    "items": {
+      "bracket": {
+        "desc": "Crea brackets de eliminación directa para 2 a 32 jugadores o equipos. Avanza ganadores con un clic y comparte el enlace con tu comunidad."
+      },
+      "leaderboard": {
+        "desc": "Tabla de puntos por rondas para torneos estilo TFT, con línea de clasificación y premios."
+      },
+      "lobbies": {
+        "desc": "Encuentra y abre lobbies de la comunidad para scrims, ranked y partidas organizadas."
+      }
+    }
+  },
+  "teams": {
+    "kicker": "// Equipos",
+    "title": "Equipo competitivo",
+    "soon": "Pronto",
+    "body": "Estamos armando el equipo competitivo de 4HOPE. Síguelo desde el Discord para enterarte primero de pruebas, roster y partidas.",
+    "cta": "Seguir en Discord"
+  },
+  "community": {
+    "kicker": "// Comunidad",
+    "title": "Únete a la comunidad",
+    "body": "Arma torneos, encuentra squad, comparte tus brackets y danos feedback de las herramientas.",
+    "cta": "Unirme al Discord",
+    "follow": "Síguenos"
+  },
+  "faq": {
+    "kicker": "// Preguntas frecuentes",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "¿Qué es 4HOPE?",
+        "a": "Una plataforma de LATAM que crea herramientas para Teamfight Tactics y su comunidad. La primera es TFT Competition Bracket."
+      },
+      {
+        "q": "¿Cuánto cuesta?",
+        "a": "Nada. Las herramientas de 4HOPE son gratis para la comunidad."
+      },
+      {
+        "q": "¿4HOPE es oficial de Riot Games?",
+        "a": "No. 4HOPE es un proyecto independiente de la comunidad y no está respaldado por Riot Games."
+      },
+      {
+        "q": "¿Qué herramientas vienen después?",
+        "a": "Estamos trabajando en tablas de puntos por rondas y lobbies para la comunidad. Revisa el Discord para novedades."
+      },
+      {
+        "q": "¿Puedo sugerir una herramienta?",
+        "a": "Sí. Escríbenos en el Discord o por correo y cuéntanos qué te hace falta para jugar u organizar."
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "// Contacto",
+    "title": "Habla con el squad",
+    "lead": "Elige lo que necesitas y tu app de correo se abre con los datos listos para completar.",
+    "discordPrompt": "¿No eres de correo?",
+    "discordLink": "Búscanos en Discord",
+    "replies": "// Respondemos en ~3 días",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "topics": {
+      "support": {
+        "kicker": "// Soporte",
+        "title": "Necesito ayuda",
+        "body": "Problemas para entrar, un lobby roto, un puntaje mal cargado o algo que se sienta injusto.",
+        "cta": "Enviar mensaje",
+        "subject": "[Soporte] ",
+        "template": "Qué pasó:\n\nHerramienta (ej. Bracket) y link:\n\nTu Riot ID:\n\nCapturas o pasos para reproducirlo:\n"
+      },
+      "data": {
+        "kicker": "// Tus datos",
+        "title": "Borrar mis datos",
+        "body": "Pídenos eliminar tu cuenta y todo lo asociado a ella.",
+        "cta": "Solicitar borrado",
+        "subject": "[Datos] Borrar mis datos",
+        "template": "Por favor eliminen mi cuenta y todos los datos asociados.\n\nRiot ID o usuario:\nCorreo de la cuenta (si es distinto a este):\n"
+      },
+      "hello": {
+        "kicker": "// Hola",
+        "title": "Otra cosa",
+        "body": "Prensa, sponsors, colaboraciones o solo para saludar.",
+        "cta": "Saludar",
+        "subject": "[Hola] ",
+        "template": "Hola 4HOPE,\n\n"
+      }
+    }
+  },
+  "finalCta": {
+    "title": "Run it back",
+    "body": "Arma tu próximo torneo en minutos.",
+    "cta": "Crear bracket"
+  },
+  "footer": {
+    "tagline": "Herramientas para la comunidad de TFT en LATAM.",
+    "product": "Producto",
+    "community": "Comunidad",
+    "legal": "Legal",
+    "contact": "Contacto",
+    "links": {
+      "tools": "Herramientas",
+      "bracket": "Bracket",
+      "faq": "FAQ",
+      "privacy": "Privacidad",
+      "disclaimer": "Aviso sobre Riot Games",
+      "email": "Correo",
+      "suggest": "Sugerir herramienta"
+    },
+    "disclaimer": "4HOPE isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",
+    "rights": "Hecho en LATAM."
+  },
+  "privacy": {
+    "title": "Privacidad",
+    "metaDescription": "Cómo 4HOPE trata tus datos en 4hope.app: analítica sin cookies y sin datos personales.",
+    "updated": "Última actualización",
+    "sections": [
+      {
+        "h": "Sin cookies",
+        "p": "4hope.app no usa cookies ni almacenamiento en tu navegador para rastrearte."
+      },
+      {
+        "h": "Analítica respetuosa con la privacidad",
+        "p": "Medimos visitas de forma agregada con una herramienta de analítica sin cookies. No recolectamos datos personales ni creamos perfiles, y no compartimos datos con anunciantes."
+      },
+      {
+        "h": "Herramientas en subdominios",
+        "p": "Cada herramienta (por ejemplo, bracket.4hope.app) puede tener su propia política. Revísala dentro de la herramienta."
+      },
+      {
+        "h": "Contacto",
+        "p": "Si tienes preguntas sobre privacidad, escríbenos a nuestro correo de contacto."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "kicker": "// Error 404 — No encontrada",
+    "headline": "Lobby equivocado.",
+    "body": "Esta página no está en el roster. Puede que se haya movido o que nunca existiera. Revisa el enlace o vuelve al inicio.",
+    "home": "Volver al inicio",
+    "bracket": "Ir al Bracket"
+  },
+  "auth": {
+    "menu": {
+      "signIn": "Iniciar sesión",
+      "account": "Tu cuenta",
+      "profile": "Mi perfil",
+      "signOut": "Cerrar sesión"
+    },
+    "legal": {
+      "prefix": "Al continuar aceptas los",
+      "terms": "Términos",
+      "and": "y la",
+      "privacy": "Política de privacidad",
+      "suffix": "de 4HOPE."
+    },
+    "login": {
+      "title": "Entra a 4HOPE",
+      "lead": "Tu squad, tus stats y tus partidas en un solo lugar.",
+      "google": "Continuar con Google",
+      "loading": "Conectando con Google…",
+      "error": "No pudimos iniciar sesión con Google. Inténtalo de nuevo."
+    },
+    "register": {
+      "title": "Te damos la bienvenida al squad",
+      "lead": "Un último paso: completa tu perfil para entrar.",
+      "loading": "Cargando tu cuenta…",
+      "username": "Nombre de jugador",
+      "usernameHint": "Letras, números, guion bajo (_) y guion (-). Máximo 24.",
+      "usernameInvalid": "Usa de 1 a 24 letras, números, _ o -.",
+      "usernameTaken": "Ese nombre de jugador ya está en uso.",
+      "displayName": "Nombre visible",
+      "displayNameHint": "Opcional. Se muestra en tu perfil en lugar del nombre de jugador.",
+      "acceptPrefix": "Acepto los",
+      "acceptAnd": "y la",
+      "acceptRequired": "Acepta los Términos y la Política de privacidad para continuar.",
+      "submit": "Entrar a la arena",
+      "saving": "Creando tu perfil…",
+      "error": "No pudimos guardar tu perfil. Inténtalo de nuevo.",
+      "signedInAs": "Conectado como",
+      "notYou": "¿No eres tú?",
+      "switchAccount": "Cambiar de cuenta"
+    },
+    "profile": {
+      "title": "Mi perfil",
+      "username": "Nombre de jugador",
+      "email": "Correo",
+      "plan": "Plan",
+      "displayName": "Nombre visible",
+      "displayNameHint": "Déjalo vacío para mostrar tu nombre de jugador.",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "saved": "Cambios guardados.",
+      "error": "No pudimos guardar el cambio. Inténtalo de nuevo.",
+      "home": "Volver al inicio"
+    }
+  }
+}

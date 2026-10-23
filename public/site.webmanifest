@@ -1,0 +1,13 @@
+{
+  "name": "4HOPE",
+  "short_name": "4HOPE",
+  "description": "Tools for the LATAM TFT community.",
+  "start_url": "/",
+  "icons": [
+    { "src": "/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0c0c0d",
+  "background_color": "#0c0c0d",
+  "display": "standalone"
+}

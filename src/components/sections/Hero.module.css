@@ -1,0 +1,53 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-arena);
+  padding-block: var(--space-1600) var(--space-2400);
+}
+@media (min-width: 768px) {
+  .hero {
+    padding-block: var(--space-2400) calc(var(--space-2400) + var(--space-400));
+  }
+}
+.bars span {
+  position: absolute;
+  top: var(--top);
+  right: var(--right);
+  width: var(--w);
+  height: 56px;
+  border-radius: var(--radius-tag);
+  background: var(--gold-500);
+  opacity: var(--o, 1);
+  transform: rotate(-32deg);
+}
+@media (max-width: 767px) {
+  .bars span {
+    opacity: 0.35;
+  }
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-400);
+}
+.wordmark {
+  color: var(--text-arena);
+  text-transform: uppercase;
+  font-size: clamp(56px, 10vw, 88px);
+  margin-top: var(--space-200);
+}
+.title {
+  max-width: 14ch;
+  font-size: clamp(40px, 7vw, 64px);
+}
+.sub {
+  max-width: 52ch;
+}
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-300);
+  margin-top: var(--space-400);
+}

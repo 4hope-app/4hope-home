@@ -1,0 +1,47 @@
+.box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 13px;
+  border-radius: 8px;
+  border: 1px solid var(--border-default-default);
+  background: var(--background-default-default);
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+.sm {
+  height: 36px;
+}
+.lg {
+  height: 48px;
+}
+.box:focus-within {
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold-500) 26%, transparent);
+}
+.invalid,
+.invalid:focus-within {
+  border-color: var(--border-danger-default);
+  box-shadow: none;
+}
+.box:has(.input:disabled) {
+  background: var(--background-disabled-default);
+  opacity: 0.6;
+}
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--text-default-default);
+}
+/* The box shows the focus state; the global focus ring would double it. */
+.input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}

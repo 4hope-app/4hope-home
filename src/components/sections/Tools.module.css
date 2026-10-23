@@ -1,0 +1,43 @@
+.tools {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tools li {
+  display: flex;
+}
+.card {
+  flex: 1;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-300);
+}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-200);
+  background: var(--ink-700);
+  color: var(--text-arena);
+}
+.tools h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-150);
+  margin-top: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--text-arena);
+}

@@ -1,0 +1,39 @@
+.teams {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-800) var(--space-600) !important;
+}
+@media (min-width: 768px) {
+  .teams {
+    padding: var(--space-1200) !important;
+  }
+}
+.body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  max-width: 620px;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+}
+.bars span {
+  position: absolute;
+  right: -60px;
+  width: 320px;
+  height: 40px;
+  border-radius: var(--radius-tag);
+  background: var(--ink-600);
+  transform: rotate(-32deg);
+}
+.bars span:first-child {
+  top: 40px;
+}
+.bars span:last-child {
+  top: 150px;
+  right: 80px;
+  width: 220px;
+}

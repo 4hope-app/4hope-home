@@ -1,0 +1,257 @@
+{
+  "meta": {
+    "title": "4HOPE — Tools for the LATAM TFT community",
+    "description": "4HOPE builds tools that make playing, organizing and competing in Teamfight Tactics easier. Starting with TFT Competition Bracket. Made in LATAM, for LATAM.",
+    "ogAlt": "4HOPE — Tools for LATAM TFT",
+    "locale": "en_US"
+  },
+  "a11y": {
+    "skip": "Skip to content",
+    "mainNav": "Main navigation",
+    "footerNav": "Footer navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "newTab": "(opens in a new tab)",
+    "language": "Language"
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "teams": "Teams",
+    "community": "Community",
+    "contact": "Contact"
+  },
+  "hero": {
+    "kicker": "// Tools for LATAM TFT",
+    "headline": "Play for real. Organize better.",
+    "sub": "4HOPE builds tools that make playing, organizing and competing in TFT easier. Made in LATAM, for LATAM.",
+    "primary": "Create bracket",
+    "secondary": "Join the Discord"
+  },
+  "whatIs": {
+    "kicker": "// What is 4HOPE",
+    "title": "A platform made by players",
+    "lead": "4HOPE is a LATAM platform building tools for Teamfight Tactics and its community. We're starting with a bracket that sets up a tournament in minutes. More tools, events and a competitive team are on the way.",
+    "points": [
+      {
+        "icon": "Globe",
+        "title": "Built for LATAM",
+        "body": "Made for our servers, our time zones and our community. Spanish first."
+      },
+      {
+        "icon": "Gift",
+        "title": "Free for the community",
+        "body": "The tools are free. Use them for your tournaments, scrims and leagues."
+      },
+      {
+        "icon": "Users",
+        "title": "Made by players",
+        "body": "We play TFT. We build what we were missing to organize and compete."
+      }
+    ]
+  },
+  "tools": {
+    "kicker": "// Tools",
+    "title": "Your TFT toolkit",
+    "lead": "One brand, several tools. Each one lives on its own 4hope.app subdomain.",
+    "live": "Live",
+    "soon": "Soon",
+    "open": "Open tool",
+    "items": {
+      "bracket": {
+        "desc": "Build single-elimination brackets for 2 to 32 players or teams. Advance winners in one click and share the link with your community."
+      },
+      "leaderboard": {
+        "desc": "Round-by-round points table for TFT-style tournaments, with a qualifying line and prizes."
+      },
+      "lobbies": {
+        "desc": "Find and open community lobbies for scrims, ranked and organized matches."
+      }
+    }
+  },
+  "teams": {
+    "kicker": "// Teams",
+    "title": "Competitive team",
+    "soon": "Soon",
+    "body": "We're putting together the 4HOPE competitive team. Follow it on Discord to hear first about tryouts, the roster and matches.",
+    "cta": "Follow on Discord"
+  },
+  "community": {
+    "kicker": "// Community",
+    "title": "Join the community",
+    "body": "Run tournaments, find your squad, share your brackets and tell us what to build next.",
+    "cta": "Join the Discord",
+    "follow": "Follow us"
+  },
+  "faq": {
+    "kicker": "// FAQ",
+    "title": "FAQ",
+    "items": [
+      {
+        "q": "What is 4HOPE?",
+        "a": "A LATAM platform building tools for Teamfight Tactics and its community. The first one is TFT Competition Bracket."
+      },
+      {
+        "q": "How much does it cost?",
+        "a": "Nothing. 4HOPE tools are free for the community."
+      },
+      {
+        "q": "Is 4HOPE an official Riot Games product?",
+        "a": "No. 4HOPE is an independent community project and isn't endorsed by Riot Games."
+      },
+      {
+        "q": "Which tools are coming next?",
+        "a": "We're working on round-by-round points tables and community lobbies. Check the Discord for news."
+      },
+      {
+        "q": "Can I suggest a tool?",
+        "a": "Yes. Message us on Discord or by email and tell us what you need to play or organize."
+      }
+    ]
+  },
+  "contact": {
+    "kicker": "// Contact",
+    "title": "Talk to the squad",
+    "lead": "Pick what you need and your email app opens with the details ready to fill in.",
+    "discordPrompt": "Not an email person?",
+    "discordLink": "Find us on Discord",
+    "replies": "// Replies in ~3 days",
+    "copy": "Copy",
+    "copied": "Copied",
+    "topics": {
+      "support": {
+        "kicker": "// Support",
+        "title": "Need a hand",
+        "body": "Sign-in trouble, a broken lobby, a wrong score, or anything that feels unfair.",
+        "cta": "Send message",
+        "subject": "[Support] ",
+        "template": "What happened:\n\nTool (e.g. Bracket) and link:\n\nYour Riot ID:\n\nScreenshots or steps to reproduce:\n"
+      },
+      "data": {
+        "kicker": "// Your data",
+        "title": "Delete my data",
+        "body": "Ask us to remove your account and everything tied to it.",
+        "cta": "Request deletion",
+        "subject": "[Data] Delete my data",
+        "template": "Please delete my account and all data tied to it.\n\nRiot ID or username:\nEmail linked to the account (if different from this one):\n"
+      },
+      "hello": {
+        "kicker": "// Hello",
+        "title": "Anything else",
+        "body": "Press, sponsors, collabs, or just saying hi.",
+        "cta": "Say hi",
+        "subject": "[Hello] ",
+        "template": "Hi 4HOPE,\n\n"
+      }
+    }
+  },
+  "finalCta": {
+    "title": "Run it back",
+    "body": "Set up your next tournament in minutes.",
+    "cta": "Create bracket"
+  },
+  "footer": {
+    "tagline": "Tools for the LATAM TFT community.",
+    "product": "Product",
+    "community": "Community",
+    "legal": "Legal",
+    "contact": "Contact",
+    "links": {
+      "tools": "Tools",
+      "bracket": "Bracket",
+      "faq": "FAQ",
+      "privacy": "Privacy",
+      "disclaimer": "Riot Games notice",
+      "email": "Email",
+      "suggest": "Suggest a tool"
+    },
+    "disclaimer": "4HOPE isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.",
+    "rights": "Made in LATAM."
+  },
+  "privacy": {
+    "title": "Privacy",
+    "metaDescription": "How 4HOPE handles your data on 4hope.app: cookie-free analytics and no personal data.",
+    "updated": "Last updated",
+    "sections": [
+      {
+        "h": "No cookies",
+        "p": "4hope.app doesn't use cookies or browser storage to track you."
+      },
+      {
+        "h": "Privacy-friendly analytics",
+        "p": "We count visits in aggregate with a cookie-free analytics tool. We don't collect personal data or build profiles, and we don't share data with advertisers."
+      },
+      {
+        "h": "Tools on subdomains",
+        "p": "Each tool (for example, bracket.4hope.app) may have its own policy. Check it inside the tool."
+      },
+      {
+        "h": "Contact",
+        "p": "If you have privacy questions, email us at our contact address."
+      }
+    ]
+  },
+  "notFound": {
+    "title": "Page not found",
+    "kicker": "// Error 404 — Not found",
+    "headline": "Wrong lobby.",
+    "body": "That page isn't on the roster. It may have moved, or it never existed. Check the link or head back home.",
+    "home": "Back to home",
+    "bracket": "Go to Bracket"
+  },
+  "auth": {
+    "menu": {
+      "signIn": "Sign in",
+      "account": "Your account",
+      "profile": "My profile",
+      "signOut": "Sign out"
+    },
+    "legal": {
+      "prefix": "By continuing you agree to the 4HOPE",
+      "terms": "Terms",
+      "and": "and",
+      "privacy": "Privacy Policy",
+      "suffix": ""
+    },
+    "login": {
+      "title": "Sign in to 4HOPE",
+      "lead": "Your squad, your stats, your matches — all in one place.",
+      "google": "Continue with Google",
+      "loading": "Connecting to Google…",
+      "error": "We couldn't sign you in with Google. Please try again."
+    },
+    "register": {
+      "title": "Welcome to the squad",
+      "lead": "One last step — finish your profile to get in.",
+      "loading": "Loading your account…",
+      "username": "Player name",
+      "usernameHint": "Letters, numbers, underscores (_) and hyphens (-). 24 max.",
+      "usernameInvalid": "Use 1–24 letters, numbers, _ or -.",
+      "usernameTaken": "That player name is already taken.",
+      "displayName": "Display name",
+      "displayNameHint": "Optional — shown instead of your player name on your profile.",
+      "acceptPrefix": "I accept the",
+      "acceptAnd": "and the",
+      "acceptRequired": "Accept the Terms and Privacy Policy to continue.",
+      "submit": "Enter the arena",
+      "saving": "Setting up your profile…",
+      "error": "We couldn't save your profile. Please try again.",
+      "signedInAs": "Signed in as",
+      "notYou": "Not you?",
+      "switchAccount": "Switch account"
+    },
+    "profile": {
+      "title": "My profile",
+      "username": "Player name",
+      "email": "Email",
+      "plan": "Plan",
+      "displayName": "Display name",
+      "displayNameHint": "Leave it empty to show your player name.",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Changes saved.",
+      "error": "We couldn't save the change. Please try again.",
+      "home": "Back to home"
+    }
+  }
+}

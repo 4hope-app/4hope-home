@@ -1,0 +1,11 @@
+/* 4Hope component stylesheet — loaded after tokens.css.
+   (Landing copy: the Google Fonts @import was removed — fonts are self-hosted in src/styles/fonts.css.)
+   Hosted faces (Archivo, Inter, Roboto Mono) and the aliases the components read. */
+
+:root {
+  --family-sans: var(--font-sans);
+  --family-mono: var(--font-mono);
+  --family-serif: var(--font-serif);
+  --font-display-weight: 800;
+  --display-tracking: -0.02em;
+}

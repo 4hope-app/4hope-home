@@ -1,0 +1,80 @@
+.err {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--surface-arena);
+  display: flex;
+  flex-direction: column;
+}
+.bars span {
+  position: absolute;
+  right: -90px;
+  width: 420px;
+  height: 52px;
+  border-radius: var(--radius-tag);
+  background: var(--gold-500);
+  transform: rotate(-32deg);
+}
+.bars span:first-child {
+  top: 200px;
+  opacity: 0.9;
+}
+.bars span:last-child {
+  bottom: -30px;
+  right: 120px;
+  width: 300px;
+}
+.top {
+  position: relative;
+  z-index: 1;
+  background: var(--surface-arena);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  border-bottom: 1px solid var(--surface-arena-line);
+}
+.status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--text-arena-muted);
+}
+.main {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-400);
+  padding-block: var(--space-1600);
+  max-width: 760px;
+  margin-inline: 0;
+}
+@media (min-width: 1200px) {
+  .main {
+    margin-inline: auto;
+    max-width: 1200px;
+  }
+}
+.code {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(96px, 16vw, 168px);
+  line-height: 0.8;
+  letter-spacing: -0.045em;
+  color: var(--gold-500);
+}
+.main > p {
+  max-width: 56ch;
+}
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-300);
+  margin-top: var(--space-200);
+}
+/* Plain links only (the logo and the English line), not the Buttons. */
+.link {
+  color: var(--text-arena);
+}

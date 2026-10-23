@@ -1,0 +1,105 @@
+/* Styles for the React islands' own wrappers and static fallbacks.
+   Design-system components inside them style themselves from tokens. */
+
+/* Mobile menu */
+.mobile-menu__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-200);
+  border: 1px solid var(--border-default-secondary);
+  background: transparent;
+  color: var(--text-arena);
+  cursor: pointer;
+}
+.mobile-menu__toggle:hover {
+  background: var(--ink-700);
+}
+.mobile-menu__panel {
+  position: fixed;
+  inset: 69px 0 0;
+  z-index: 49;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-600);
+  padding: var(--space-400) max(var(--space-400), env(safe-area-inset-right, 0px))
+    max(var(--space-600), env(safe-area-inset-bottom, 0px))
+    max(var(--space-400), env(safe-area-inset-left, 0px));
+  background: var(--surface-arena);
+  overflow-y: auto;
+}
+.mobile-menu__panel[hidden] {
+  display: none;
+}
+.mobile-menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-100);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mobile-menu__list button,
+.mobile-menu__link {
+  min-height: 48px;
+  font-size: 18px !important;
+  font-family: var(--font-display) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: var(--radius-200);
+  color: var(--text-arena);
+  text-decoration: none;
+}
+.mobile-menu__foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  padding-top: var(--space-400);
+  border-top: 1px solid var(--surface-arena-line);
+}
+.mobile-menu__langs {
+  display: flex;
+  gap: var(--space-200);
+}
+.mobile-menu__langs a {
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--surface-arena-line);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: var(--text-arena-muted);
+}
+.mobile-menu__langs a[aria-current='true'] {
+  background: var(--ink-600);
+  color: var(--text-arena);
+}
+
+/* FAQ static fallback (matches the Accordion layout) */
+.faq-static {
+  border-top: 1px solid var(--border-default-default);
+}
+.faq-static details {
+  border-bottom: 1px solid var(--border-default-default);
+}
+.faq-static summary {
+  padding: var(--space-400) var(--space-100);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-arena);
+  cursor: pointer;
+}
+.faq-static p {
+  padding: 0 var(--space-100) var(--space-400);
+  font-size: 15px;
+  color: var(--text-arena-muted);
+}

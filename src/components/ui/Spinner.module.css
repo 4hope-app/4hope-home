@@ -1,0 +1,15 @@
+.spinner {
+  display: inline-block;
+  flex: none;
+  width: var(--size);
+  height: var(--size);
+  border: var(--stroke) solid color-mix(in srgb, var(--color) 22%, transparent);
+  border-top-color: var(--color);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

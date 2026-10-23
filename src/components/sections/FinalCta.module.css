@@ -1,0 +1,43 @@
+/* Full-gold strip: the one view where gold is the ground; text on it is always ink. */
+.final {
+  position: relative;
+  overflow: hidden;
+  background: var(--gold-500);
+  color: var(--brand-on-gold);
+  padding-block: var(--space-1600);
+}
+.inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-600);
+}
+.title {
+  color: var(--brand-on-gold);
+  font-size: clamp(44px, 9vw, 96px);
+  line-height: 0.92;
+}
+.body {
+  margin-top: var(--space-300);
+  font-size: 18px;
+  color: var(--brand-on-gold);
+}
+.bars span {
+  position: absolute;
+  right: -40px;
+  width: 360px;
+  height: 48px;
+  border-radius: var(--radius-tag);
+  background: var(--gold-600);
+  transform: rotate(-32deg);
+}
+.bars span:first-child {
+  top: -20px;
+}
+.bars span:last-child {
+  bottom: -30px;
+  right: 160px;
+  width: 260px;
+}

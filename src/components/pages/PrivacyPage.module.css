@@ -1,0 +1,22 @@
+.privacy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  max-width: 760px;
+  padding-block: var(--space-1600) var(--space-2400);
+}
+.privacy section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  margin-top: var(--space-400);
+}
+.privacy h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+.privacy a {
+  color: var(--text-arena);
+}

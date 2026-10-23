@@ -1,0 +1,22 @@
+.points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-200);
+  background: var(--ink-700);
+  color: var(--gold-500);
+}
+.points h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--text-arena);
+}

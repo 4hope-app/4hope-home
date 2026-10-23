@@ -1,0 +1,45 @@
+.community {
+  display: grid !important;
+  gap: var(--space-800) !important;
+  padding: var(--space-800) var(--space-600) !important;
+}
+@media (min-width: 900px) {
+  .community {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    padding: var(--space-1200) !important;
+  }
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  max-width: 620px;
+}
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+}
+.social ul {
+  display: flex;
+  gap: var(--space-200);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* Server version of the design system IconButton (subtle, md). */
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-200);
+  border: 1px solid var(--border-default-secondary);
+  color: var(--text-arena);
+  transition: background-color 120ms ease;
+}
+.iconBtn:hover {
+  background: var(--ink-700);
+}

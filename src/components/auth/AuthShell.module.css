@@ -1,0 +1,103 @@
+.shell {
+  --bar-scale: 1;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-600);
+  background: var(--ink-1000);
+}
+@media (max-width: 1023px) {
+  .shell {
+    --bar-scale: 0.72;
+  }
+}
+/* Below the sticky header: fill the rest of the first screen, keep the footer below the fold. */
+.framed {
+  min-height: calc(100vh - 69px);
+  padding-block: var(--space-1600);
+}
+@media (max-width: 599px) {
+  .shell {
+    --bar-scale: 0.5;
+  }
+}
+.bars span {
+  position: absolute;
+  height: calc(44px * var(--bar-scale));
+  border-radius: var(--radius-tag);
+  background: var(--gold-500);
+  transform: rotate(-32deg);
+}
+.bars span:nth-child(1) {
+  top: -70px;
+  left: -110px;
+  width: calc(520px * var(--bar-scale));
+  opacity: 0.2;
+}
+.bars span:nth-child(2) {
+  bottom: -40px;
+  right: -110px;
+  width: calc(520px * var(--bar-scale));
+  opacity: 0.2;
+}
+.bars span:nth-child(3) {
+  top: 36px;
+  left: 16px;
+  width: calc(260px * var(--bar-scale));
+  opacity: 0.12;
+}
+@media (max-width: 599px) {
+  .bars span[data-tier='mid'] {
+    display: none;
+  }
+}
+.main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px !important;
+  gap: 0 !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+.wide {
+  max-width: 440px;
+}
+@media (max-width: 479px) {
+  .card {
+    padding: var(--space-600) !important;
+  }
+}
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-200);
+  margin-bottom: var(--space-800);
+  text-align: center;
+}
+.head img {
+  width: 45px;
+  height: 56px;
+}
+.title {
+  margin-top: var(--space-200);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-arena);
+}
+.lead {
+  font-size: 14px;
+  color: var(--text-arena-muted);
+}

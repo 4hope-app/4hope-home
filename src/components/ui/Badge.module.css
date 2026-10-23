@@ -1,0 +1,38 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+}
+.brand {
+  background: var(--gold-500);
+  color: var(--brand-on-gold);
+}
+.neutral {
+  background: var(--slate-700);
+  color: var(--brand-white);
+}
+.positive {
+  /* green-400 + ink: 12:1 on ink surfaces (the design system pairs status on ink with -400). */
+  background: var(--green-400);
+  color: var(--brand-ink);
+}
+.danger {
+  background: var(--red-600);
+  color: var(--brand-white);
+}

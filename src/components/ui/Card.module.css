@@ -1,0 +1,24 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-300);
+  min-width: 0;
+  padding: var(--space-600);
+  border-radius: var(--radius-card);
+  background: var(--ink-800);
+  border: 1px solid var(--surface-arena-line);
+  color: var(--text-arena);
+  text-decoration: none;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+.interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ring-gold);
+}
+@media (prefers-reduced-motion: reduce) {
+  .interactive:hover {
+    transform: none;
+  }
+}
