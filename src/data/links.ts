@@ -17,7 +17,7 @@ export const links = {
   // TODO: Discord invite URL (permanent invite, no expiry).
   discord: 'https://discord.gg/TODO-4hope-invite',
   // TODO: contact email (needs a mailbox on 4hope.app).
-  email: 'hola@4hope.app',
+  email: 'hello@4hope.app',
   // TODO: Discord channel or form for tool suggestions; defaults to the invite.
   suggest: 'https://discord.gg/TODO-4hope-invite',
 } as const;
