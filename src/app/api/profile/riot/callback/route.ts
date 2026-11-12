@@ -5,7 +5,7 @@
  */
 import { cookies } from 'next/headers';
 import { auth } from '@/lib/auth';
-import { envCollection, getAdminDb } from '@/lib/firebaseAdmin';
+import { envCollection, getAdminDb } from '@/lib/firestore';
 import { serverFromPlatform } from '@/lib/riot';
 import { buildRiotRecord, rsoIdentity } from '@/lib/riotApi';
 import { RSO_COOKIE, backToProfile, readRsoCookie, rsoRedirectUri } from '@/lib/riotLink';

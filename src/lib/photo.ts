@@ -3,7 +3,7 @@
  * `photo.currentBytes` (+ `photo.contentType`), the same field 4hope-webpage reads, so a photo set
  * in either app shows in both. The browser crops and re-encodes it (no `sharp` on Workers).
  */
-import type { DocumentData } from 'firebase-admin/firestore';
+import type { DocumentData } from '@/lib/firestore';
 import { PHOTO_MAX_BYTES } from './profile';
 
 const TYPES = ['image/webp', 'image/jpeg', 'image/png'] as const;

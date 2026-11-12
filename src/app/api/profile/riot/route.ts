@@ -6,8 +6,7 @@
  * Errors are `{ error: RiotLinkResult }` codes; the UI maps them to copy.
  */
 import { NextResponse } from 'next/server';
-import { FieldValue } from 'firebase-admin/firestore';
-import { envCollection, getAdminDb } from '@/lib/firebaseAdmin';
+import { FieldValue, envCollection, getAdminDb } from '@/lib/firestore';
 import { isRiotServer, type RiotLinkResult } from '@/lib/riot';
 import { buildRiotRecord, riotApiKey, riotRefreshCooldownMs, toRiotView } from '@/lib/riotApi';
 import { requireSession } from '@/lib/requireSession';

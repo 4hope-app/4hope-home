@@ -8,7 +8,7 @@
  * 304 with no body.
  */
 import { NextResponse } from 'next/server';
-import { envCollection, getAdminDb } from '@/lib/firebaseAdmin';
+import { envCollection, getAdminDb } from '@/lib/firestore';
 import { profilePhoto } from '@/lib/photo';
 import { requireSession } from '@/lib/requireSession';
 

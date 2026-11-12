@@ -6,8 +6,13 @@
  *           400 invalid, 404 if there's no profile yet.
  */
 import { NextResponse } from 'next/server';
-import { FieldValue, type DocumentData } from 'firebase-admin/firestore';
-import { envCollection, getAdminDb, timestampToDate } from '@/lib/firebaseAdmin';
+import {
+  FieldValue,
+  envCollection,
+  getAdminDb,
+  timestampToDate,
+  type DocumentData,
+} from '@/lib/firestore';
 import { TERMS_VERSION } from '@/lib/legal';
 import { parsePhotoDataUrl } from '@/lib/photo';
 import {

@@ -3,7 +3,6 @@
  * column: header with photo and name, a divider, then the account settings (display name, photo)
  * and the linked Riot account.
  */
-import type { DocumentData } from 'firebase-admin/firestore';
 import Footer from '../layout/Footer';
 import Header from '../layout/Header';
 import AccountForm from '../profile/AccountForm';
@@ -11,7 +10,7 @@ import ProfileHero from '../profile/ProfileHero';
 import RiotAccountCard from '../profile/RiotAccountCard';
 import Icon from '../ui/Icon';
 import { localizePath, t, type Lang } from '@/i18n/utils';
-import { envCollection, getAdminDb } from '@/lib/firebaseAdmin';
+import { envCollection, getAdminDb, type DocumentData } from '@/lib/firestore';
 import { profilePhotoSrc } from '@/lib/photo';
 import { isRiotLinkResult, isRiotServer, type RiotAccountView } from '@/lib/riot';
 import {

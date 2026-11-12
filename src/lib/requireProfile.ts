@@ -1,8 +1,7 @@
 import { redirect } from 'next/navigation';
 import type { Session } from 'next-auth';
-import type { DocumentData } from 'firebase-admin/firestore';
 import { auth } from './auth';
-import { envCollection, getAdminDb } from './firebaseAdmin';
+import { envCollection, getAdminDb, type DocumentData } from './firestore';
 import { withCallback } from './profile';
 
 /**
