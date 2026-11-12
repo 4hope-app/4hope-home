@@ -120,7 +120,7 @@ Node 22.6+ (`.nvmrc`). After changing code, run `npm run check`, `npm run lint` 
 ## Known open items
 
 - `/terms` page doesn't exist (linked from sign-in and onboarding).
-- `src/data/links.ts`: Discord invite and social URLs are `TODO` placeholders.
+- `src/data/links.ts`: social URLs (X, Instagram, Twitch) are `TODO` placeholders; the Discord invite is set.
 - OG images are placeholders; TT Bluescreens is a trial font (license pending).
 - Search for `TODO:` to find the rest. The launch checklist is in `README.md`.
 

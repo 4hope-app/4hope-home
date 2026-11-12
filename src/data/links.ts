@@ -14,16 +14,15 @@ export interface SocialLink {
 export const links = {
   site: 'https://4hope.app',
   bracket: 'https://bracket.4hope.app',
-  // TODO: Discord invite URL (permanent invite, no expiry).
-  discord: 'https://discord.gg/TODO-4hope-invite',
+  discord: 'https://discord.gg/mXNMRPpn65',
   // TODO: contact email (needs a mailbox on 4hope.app).
   email: 'hola@4hope.app',
   // TODO: Discord channel or form for tool suggestions; defaults to the invite.
-  suggest: 'https://discord.gg/TODO-4hope-invite',
+  suggest: 'https://discord.gg/mXNMRPpn65',
 } as const;
 
 export const socials: SocialLink[] = [
-  { id: 'discord', label: 'Discord', href: links.discord, icon: 'MessageCircle', ready: false },
+  { id: 'discord', label: 'Discord', href: links.discord, icon: 'MessageCircle', ready: true },
   // TODO: X / Twitter handle
   { id: 'x', label: 'X', href: 'https://x.com/TODO-4hope', icon: 'Twitter', ready: false },
   // TODO: Instagram handle

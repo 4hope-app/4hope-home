@@ -130,7 +130,7 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 - [ ] **DNS** — point `4hope.app` (and `www`) to the Cloudflare Worker.
 - [ ] **Auth** — create the Google OAuth client and the Firebase service account; set the secrets in Cloudflare.
 - [ ] **Terms page** — `/terms` doesn't exist yet; the sign-in and onboarding screens link to it.
-- [ ] **Discord** — replace `https://discord.gg/TODO-4hope-invite` in `src/data/links.ts`.
+- [x] **Discord** — invite `https://discord.gg/mXNMRPpn65` in `src/data/links.ts`.
 - [ ] **Socials** — set the X, Instagram and Twitch URLs in `src/data/links.ts` and set `ready: true`.
 - [ ] **Contact email** — create the `hola@4hope.app` mailbox (or change `links.email`).
 - [ ] **OG images** — replace the placeholders `public/og/og-es.png` and `og-en.png` (1200×630).
