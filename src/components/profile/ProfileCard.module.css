@@ -1,0 +1,54 @@
+/* Card's own gap (12px) is too tight between the kicker row and forms. */
+.card {
+  gap: var(--space-400) !important;
+}
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-300);
+  min-height: 32px;
+}
+.divided {
+  padding-bottom: var(--space-300);
+  border-bottom: 1px solid var(--surface-arena-line);
+}
+/* Gold `// KICKER` (global .kicker color), like the footer and section headings. */
+.kicker {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-200);
+  padding: var(--space-600) var(--space-400) var(--space-200);
+  text-align: center;
+}
+.emptyIcon {
+  display: inline-flex;
+  color: var(--text-arena-muted);
+}
+.emptyTitle {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-arena);
+}
+.emptyHint {
+  max-width: 320px;
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-arena-muted);
+}
+.emptyAction {
+  margin-top: var(--space-400);
+}

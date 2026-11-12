@@ -24,19 +24,6 @@ export const tools: Tool[] = [
     status: 'live',
     icon: 'Share2',
   },
-  // TODO: confirm the next tools and their names. These two exist as templates in the design system.
-  {
-    id: 'leaderboard',
-    name: 'TFT Leaderboard',
-    status: 'soon',
-    icon: 'BarChart2',
-  },
-  {
-    id: 'lobbies',
-    name: 'Lobbies',
-    status: 'soon',
-    icon: 'Users',
-  },
 ];
 
 export const liveTool = tools.find((t) => t.status === 'live' && t.id === 'bracket');

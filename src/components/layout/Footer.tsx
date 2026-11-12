@@ -37,6 +37,7 @@ export default function Footer({ lang }: Props) {
     {
       title: f.legal,
       links: [
+        { label: f.links.terms, href: localizePath('/terms', lang) },
         { label: f.links.privacy, href: localizePath('/privacy', lang) },
         { label: f.links.disclaimer, href: `#${disclaimerId}` },
       ],

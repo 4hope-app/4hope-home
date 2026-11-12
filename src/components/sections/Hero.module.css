@@ -51,3 +51,6 @@
   gap: var(--space-300);
   margin-top: var(--space-400);
 }
+.accent {
+  color: var(--gold-500);
+}

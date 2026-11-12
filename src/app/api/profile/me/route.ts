@@ -2,12 +2,19 @@
  * The signed-in user's profile, stored at users/{session.user.id} (users-uat outside production).
  *   GET   → { exists: false, account } before onboarding, { exists: true, profile } after.
  *   POST  → creates/completes the profile (onboarding). 400 invalid, 409 username taken.
- *   PATCH → edits displayName. 404 if there's no profile yet.
+ *   PATCH → edits displayName and/or the photo ({ photo: dataUrl } or { removePhoto: true }).
+ *           400 invalid, 404 if there's no profile yet.
  */
 import { NextResponse } from 'next/server';
-import { FieldValue, Timestamp, type DocumentData } from 'firebase-admin/firestore';
-import { envCollection, getAdminDb } from '@/lib/firebaseAdmin';
+import {
+  FieldValue,
+  envCollection,
+  getAdminDb,
+  timestampToDate,
+  type DocumentData,
+} from '@/lib/firestore';
 import { TERMS_VERSION } from '@/lib/legal';
+import { parsePhotoDataUrl } from '@/lib/photo';
 import {
   DISPLAY_NAME_MAX,
   isValidUsername,
@@ -22,9 +29,11 @@ const badRequest = (error: string, status = 400) => NextResponse.json({ error },
 
 /** Firestore Timestamps → ISO strings so the profile serializes as plain JSON. */
 function toProfile(data: DocumentData): Profile {
-  const iso = (v: unknown) => (v instanceof Timestamp ? v.toDate().toISOString() : null);
+  const iso = (v: unknown) => timestampToDate(v)?.toISOString() ?? null;
   return {
     ...(data as Profile),
+    // Photo bytes stay out of the JSON (the page renders them server-side).
+    photo: { gmailUrl: (data.photo?.gmailUrl as string | null | undefined) ?? null },
     createdAt: iso(data.createdAt),
     termsAcceptedAt: iso(data.termsAcceptedAt),
   };
@@ -101,6 +110,7 @@ export async function POST(request: Request) {
         usernameKey,
         displayName: displayName ?? username,
         email: session.user.email ?? null,
+        provider: session.user.provider,
         photo: { gmailUrl: session.user.image ?? null },
         ...(current.exists ? {} : { createdAt: FieldValue.serverTimestamp() }),
         termsAcceptedAt: FieldValue.serverTimestamp(),
@@ -123,16 +133,31 @@ export async function PATCH(request: Request) {
 
   const body = await readJson(request);
   if (!body) return badRequest('Invalid JSON body');
-  const displayName = parseDisplayName(body.displayName);
-  if (displayName === null)
-    return badRequest(`Display name must be ${DISPLAY_NAME_MAX} characters or fewer`);
+
+  const updates: Record<string, unknown> = {};
+  if ('displayName' in body) {
+    const displayName = parseDisplayName(body.displayName);
+    if (displayName === null)
+      return badRequest(`Display name must be ${DISPLAY_NAME_MAX} characters or fewer`);
+    updates.displayName = displayName;
+  }
+  if (body.removePhoto === true) {
+    updates['photo.currentBytes'] = FieldValue.delete();
+    updates['photo.contentType'] = FieldValue.delete();
+  } else if (body.photo !== undefined) {
+    const photo = parsePhotoDataUrl(body.photo);
+    if (!photo) return badRequest('Photo must be a WebP, JPEG or PNG image of 200 KB or less');
+    updates['photo.currentBytes'] = photo.bytes;
+    updates['photo.contentType'] = photo.contentType;
+  }
 
   const ref = users().doc(session.user.id);
   const doc = await ref.get();
   if (!doc.exists) return badRequest('Profile not found', 404);
 
   // An empty display name falls back to the username, as at sign-up.
-  await ref.update({ displayName: displayName ?? doc.data()?.username });
+  if ('displayName' in updates) updates.displayName ??= doc.data()?.username;
+  if (Object.keys(updates).length) await ref.update(updates);
   const saved = await ref.get();
   return NextResponse.json({ exists: true, profile: toProfile(saved.data() ?? {}) });
 }
