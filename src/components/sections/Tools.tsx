@@ -20,7 +20,8 @@ export default function Tools({ lang }: Props) {
     <section className="section" id={sectionIds[lang].tools} aria-labelledby="tools-title">
       <div className="container">
         <SectionHead id="tools-title" kicker={copy.kicker} title={copy.title} lead={copy.lead} />
-        <ul className={`grid grid--3 ${styles.tools}`}>
+        {/* One tool for now: a full-width card instead of a third of the grid. */}
+        <ul className={`grid ${tools.length > 1 ? 'grid--3' : styles.single} ${styles.tools}`}>
           {tools.map((tool) => {
             const live = tool.status === 'live' && tool.url;
             return (

@@ -22,50 +22,45 @@
     "contact": "Contacto"
   },
   "hero": {
-    "kicker": "// Herramientas para TFT LATAM",
-    "headline": "Juega en serio. Organiza mejor.",
-    "sub": "4HOPE crea herramientas para que jugar, organizar y competir en TFT sea más fácil. Hecho en LATAM, para LATAM.",
+    "kicker": "// Más allá del juego. Más allá de la imaginación",
+    "headline": "Juega\nen serio\nsube de nivel",
+    "headlineAccent": "en serio",
+    "sub": "Buena onda, compañerismo y un poco de suerte: eso es 4Hope. TFT y League, siempre juntos.",
     "primary": "Crear bracket",
     "secondary": "Unirme al Discord"
   },
   "whatIs": {
     "kicker": "// Qué es 4HOPE",
-    "title": "Una plataforma hecha por jugadores",
-    "lead": "4HOPE es una plataforma de LATAM que construye herramientas para Teamfight Tactics y su comunidad. Arrancamos con un bracket para organizar torneos en minutos. Vienen más herramientas, eventos y un equipo competitivo.",
+    "title": "Hecho por gamers. Impulsado por ideas.",
+    "lead": "4HOPE es una empresa de gaming y tecnología fundada por personas emprendedoras de LATAM. Creamos herramientas, juegos y experiencias basadas en datos que acercan a quienes juegan y a sus comunidades.",
     "points": [
       {
         "icon": "Globe",
-        "title": "Hecho para LATAM",
-        "body": "Pensado para nuestros servidores, horarios y comunidad. En español primero."
+        "title": "Nacimos en LATAM",
+        "body": "Fundada por personas emprendedoras de LATAM, creamos experiencias de gaming para quienes juegan en todo el mundo."
       },
       {
-        "icon": "Gift",
-        "title": "Gratis para la comunidad",
-        "body": "Las herramientas son gratuitas. Úsalas para tus torneos, scrims y ligas."
+        "icon": "PlayCircle",
+        "title": "Juegos y tecnología",
+        "body": "Creamos herramientas de gaming, desarrollamos juegos y exploramos nuevas formas de jugar."
       },
       {
-        "icon": "Users",
-        "title": "Hecho por jugadores",
-        "body": "Jugamos TFT. Construimos lo que nos hacía falta para organizar y competir."
+        "icon": "BarChart",
+        "title": "Datos y análisis",
+        "body": "Convertimos los datos de juego en análisis útiles, estadísticas y reportes interactivos."
       }
     ]
   },
   "tools": {
     "kicker": "// Herramientas",
-    "title": "Tus herramientas para TFT",
-    "lead": "Una sola marca, varias herramientas. Cada una vive en su propio subdominio de 4hope.app.",
+    "title": "Nuestra primera herramienta",
+    "lead": "TFT Competition Bracket es la primera herramienta que desarrolla 4HOPE: arma un torneo en minutos y compártelo con tu comunidad. Vienen más.",
     "live": "Live",
     "soon": "Pronto",
     "open": "Abrir herramienta",
     "items": {
       "bracket": {
-        "desc": "Crea brackets de eliminación directa para 2 a 32 jugadores o equipos. Avanza ganadores con un clic y comparte el enlace con tu comunidad."
-      },
-      "leaderboard": {
-        "desc": "Tabla de puntos por rondas para torneos estilo TFT, con línea de clasificación y premios."
-      },
-      "lobbies": {
-        "desc": "Encuentra y abre lobbies de la comunidad para scrims, ranked y partidas organizadas."
+        "desc": "Crea brackets de eliminación directa para jugadores o equipos. Avanza ganadores con un clic y comparte el enlace con tu comunidad."
       }
     }
   },
@@ -89,23 +84,23 @@
     "items": [
       {
         "q": "¿Qué es 4HOPE?",
-        "a": "Una plataforma de LATAM que crea herramientas para Teamfight Tactics y su comunidad. La primera es TFT Competition Bracket."
+        "a": "Una empresa de gaming y tecnología fundada por personas emprendedoras de LATAM. Creamos herramientas, juegos y experiencias basadas en datos para quienes juegan TFT y League, y para sus comunidades. Nuestra primera herramienta es TFT Competition Bracket."
       },
       {
         "q": "¿Cuánto cuesta?",
-        "a": "Nada. Las herramientas de 4HOPE son gratis para la comunidad."
+        "a": "Nada. TFT Competition Bracket es gratis, igual que tu cuenta de 4HOPE."
       },
       {
         "q": "¿4HOPE es oficial de Riot Games?",
-        "a": "No. 4HOPE es un proyecto independiente de la comunidad y no está respaldado por Riot Games."
+        "a": "No. 4HOPE es una empresa independiente y no está respaldada por Riot Games. Teamfight Tactics y League of Legends son marcas de Riot Games, Inc."
       },
       {
-        "q": "¿Qué herramientas vienen después?",
-        "a": "Estamos trabajando en tablas de puntos por rondas y lobbies para la comunidad. Revisa el Discord para novedades."
+        "q": "¿Qué viene después?",
+        "a": "Estamos trabajando en nuevas herramientas, juegos y experiencias con datos para TFT y League, como estadísticas y reportes interactivos. Síguenos en el Discord para enterarte primero."
       },
       {
-        "q": "¿Puedo sugerir una herramienta?",
-        "a": "Sí. Escríbenos en el Discord o por correo y cuéntanos qué te hace falta para jugar u organizar."
+        "q": "¿Puedo sugerir una idea?",
+        "a": "Sí. Escríbenos en el Discord o por correo y cuéntanos qué te gustaría ver: una herramienta, un juego o una estadística que te haga falta."
       }
     ]
   },
@@ -151,7 +146,7 @@
     "cta": "Crear bracket"
   },
   "footer": {
-    "tagline": "Herramientas para la comunidad de TFT en LATAM.",
+    "tagline": "Más allá del juego. Más allá de la imaginación.",
     "product": "Producto",
     "community": "Comunidad",
     "legal": "Legal",
@@ -160,6 +155,7 @@
       "tools": "Herramientas",
       "bracket": "Bracket",
       "faq": "FAQ",
+      "terms": "Términos y condiciones",
       "privacy": "Privacidad",
       "disclaimer": "Aviso sobre Riot Games",
       "email": "Correo",
@@ -188,6 +184,61 @@
       {
         "h": "Contacto",
         "p": "Si tienes preguntas sobre privacidad, escríbenos a nuestro correo de contacto."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Términos y condiciones",
+    "metaDescription": "Las reglas para usar 4hope.app y tu cuenta de 4HOPE: qué ofrecemos, qué esperamos de ti y cómo tratamos tu contenido.",
+    "updated": "Última actualización",
+    "sections": [
+      {
+        "h": "Aceptación",
+        "p": "Al usar 4hope.app o crear una cuenta de 4HOPE aceptas estos términos y nuestra Política de privacidad. Si no estás de acuerdo, no uses el servicio."
+      },
+      {
+        "h": "Qué es 4HOPE",
+        "p": "4HOPE es un proyecto de la comunidad que ofrece herramientas gratuitas para jugadores de Teamfight Tactics en LATAM. Algunas herramientas viven en sus propios subdominios (por ejemplo, bracket.4hope.app) y pueden tener reglas adicionales."
+      },
+      {
+        "h": "Tu cuenta",
+        "p": "Inicias sesión con tu cuenta de Google. Necesitas tener al menos 13 años, o la edad mínima que exija la ley de tu país. Eres responsable de lo que se haga con tu cuenta. Tu nombre de jugador es único y no se puede cambiar; tu nombre visible y tu foto sí."
+      },
+      {
+        "h": "Cuenta de Riot",
+        "p": "Puedes vincular tu cuenta de Riot iniciando sesión en Riot, lo que confirma que es tuya. Solo vincula cuentas propias. Mostramos tu Riot ID, tu servidor y tu rango de TFT en tu perfil, y puedes desvincular la cuenta cuando quieras."
+      },
+      {
+        "h": "Uso aceptable",
+        "p": "No suplantes a otras personas, no uses nombres ni imágenes ofensivos, discriminatorios o sexuales, no acoses a nadie y no intentes interferir con el servicio ni abusar de él con automatizaciones. Podemos editar o quitar contenido y suspender cuentas que no respeten estas reglas."
+      },
+      {
+        "h": "Tu contenido",
+        "p": "Tu nombre visible y tu foto siguen siendo tuyos. Nos das permiso para mostrarlos dentro de 4HOPE mientras tengas tu cuenta. Sube solo imágenes que tengas derecho a usar."
+      },
+      {
+        "h": "Riot Games",
+        "p": "4HOPE no está respaldado por Riot Games y no refleja las opiniones de Riot Games ni de nadie que participe oficialmente en la producción o gestión de sus propiedades. Riot Games, Teamfight Tactics y las propiedades asociadas son marcas comerciales o marcas registradas de Riot Games, Inc."
+      },
+      {
+        "h": "Servicio gratuito, sin garantías",
+        "p": "4HOPE es gratis y se ofrece tal cual. Puede cambiar, interrumpirse o dejar de existir. Los datos de partidas y rangos vienen de la API de Riot y pueden tener retrasos o errores."
+      },
+      {
+        "h": "Responsabilidad",
+        "p": "En la medida en que la ley lo permita, 4HOPE y su equipo no son responsables de daños indirectos ni de pérdidas derivadas del uso del servicio o de no poder usarlo."
+      },
+      {
+        "h": "Eliminar tu cuenta",
+        "p": "Puedes pedirnos que eliminemos tu cuenta y tus datos en cualquier momento escribiéndonos a nuestro correo de contacto."
+      },
+      {
+        "h": "Cambios a estos términos",
+        "p": "Podemos actualizar estos términos. La fecha de arriba indica la versión vigente. Si el cambio es importante, te pediremos que los aceptes de nuevo."
+      },
+      {
+        "h": "Contacto",
+        "p": "Si tienes preguntas sobre estos términos, escríbenos a nuestro correo de contacto."
       }
     ]
   },
@@ -242,16 +293,68 @@
     },
     "profile": {
       "title": "Mi perfil",
-      "username": "Nombre de jugador",
-      "email": "Correo",
-      "plan": "Plan",
-      "displayName": "Nombre visible",
-      "displayNameHint": "Déjalo vacío para mostrar tu nombre de jugador.",
-      "save": "Guardar",
-      "saving": "Guardando…",
-      "saved": "Cambios guardados.",
-      "error": "No pudimos guardar el cambio. Inténtalo de nuevo.",
-      "home": "Volver al inicio"
+      "noTeam": "Sin squad",
+      "providers": {
+        "google": "Google"
+      },
+      "account": {
+        "kicker": "Cuenta",
+        "displayName": "Nombre visible",
+        "displayNamePlaceholder": "Agrega tu nombre visible",
+        "username": "Nombre de jugador",
+        "usernameHint": "Tu nombre de jugador no se puede cambiar.",
+        "email": "Correo",
+        "emailHint": "Iniciaste sesión con {provider}: este es el correo con el que entras.",
+        "photo": "Foto de perfil",
+        "save": "Guardar cambios",
+        "saving": "Guardando…",
+        "saved": "Cambios guardados.",
+        "error": "No pudimos guardar el cambio. Inténtalo de nuevo.",
+        "photoChange": "Cambiar foto",
+        "photoRemove": "Quitar foto",
+        "photoInvalid": "Usa una imagen JPG, PNG o WebP.",
+        "cropTitle": "Personaliza tu foto",
+        "cropClose": "Cerrar",
+        "cropArea": "Área de recorte",
+        "cropMin": "El área de recorte debe medir al menos 60×60 px.",
+        "cropKeys": "Con el teclado: flechas para mover, + y − para cambiar el tamaño.",
+        "cropCancel": "Cancelar",
+        "cropDone": "Listo"
+      },
+      "riot": {
+        "kicker": "Cuenta de Riot",
+        "emptyTitle": "No hay cuenta de Riot vinculada",
+        "emptyHint": "Vincula tu Riot ID para mostrar tu rango en tu perfil.",
+        "link": "Conectar con Riot",
+        "linkHint": "Inicias sesión en Riot para confirmar que la cuenta es tuya.",
+        "notConfigured": "La conexión con Riot estará disponible pronto.",
+        "refresh": "Actualizar rango",
+        "refreshIn": "Podrás actualizar en {time}",
+        "unlink": "Desvincular cuenta de Riot",
+        "unlinkConfirm": "¿Desvincular {riotId} de tu perfil?",
+        "unlinkYes": "Sí, desvincular",
+        "unlinking": "Desvinculando…",
+        "cancel": "Cancelar",
+        "unverified": "Sin verificar",
+        "unverifiedHint": "No pudimos consultar tu rango en Riot. Lo intentaremos de nuevo.",
+        "notOwned": "Sin confirmar",
+        "notOwnedHint": "Esta cuenta se vinculó sin iniciar sesión en Riot. Conéctala con Riot para confirmar que es tuya.",
+        "reconnect": "Confirmar con Riot",
+        "unranked": "Sin rango",
+        "results": {
+          "linked": "Cuenta de Riot vinculada.",
+          "refreshed": "Rango actualizado.",
+          "unlinked": "Cuenta de Riot desvinculada.",
+          "denied": "Cancelaste el inicio de sesión en Riot. No se vinculó ninguna cuenta.",
+          "failed": "No pudimos completar la conexión con Riot. Inténtalo de nuevo.",
+          "taken": "Esa cuenta de Riot ya está vinculada a otro perfil de 4HOPE.",
+          "not_found": "No encontramos esa cuenta de Riot.",
+          "not_linked": "No tienes una cuenta de Riot vinculada.",
+          "cooldown": "Espera unos minutos antes de volver a actualizar.",
+          "unavailable": "La conexión con Riot no está disponible ahora. Inténtalo más tarde.",
+          "generic": "Algo salió mal. Inténtalo de nuevo."
+        }
+      }
     }
   }
 }

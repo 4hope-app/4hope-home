@@ -3,7 +3,7 @@
  * FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY (never NEXT_PUBLIC_).
  */
 import { cert, getApp, getApps, initializeApp } from 'firebase-admin/app';
-import { getFirestore, type Firestore } from 'firebase-admin/firestore';
+import { Timestamp, getFirestore, type Firestore } from 'firebase-admin/firestore';
 
 // Cached on globalThis so dev hot reloads reuse the instance (settings() can only run once).
 const cache = globalThis as typeof globalThis & { __adminDb?: Firestore };
@@ -34,4 +34,16 @@ export function getAdminDb(): Firestore {
 /** Collection name for the current environment: `users` in production, `users-uat` elsewhere. */
 export function envCollection(name: string): string {
   return process.env.APP_ENV === 'production' ? name : `${name}-uat`;
+}
+
+/**
+ * A date field as a Date, or null. Accepts Firestore Timestamps (what this app writes) and ISO
+ * strings (what other 4HOPE apps sharing the users collection write, e.g. `createdAt`).
+ */
+export function timestampToDate(value: unknown): Date | null {
+  if (typeof value === 'string') {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+  return value instanceof Timestamp ? value.toDate() : null;
 }

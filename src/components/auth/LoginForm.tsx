@@ -7,14 +7,17 @@ import GoogleG from '@/components/auth/GoogleG';
 import Spinner from '@/components/ui/Spinner';
 import { buttonClass } from '@/components/ui/buttonClass';
 import type { Dictionary } from '@/i18n/utils';
-import { safeCallbackUrl } from '@/lib/profile';
+import { DEFAULT_AFTER_SIGN_IN, safeCallbackUrl, withCallback } from '@/lib/profile';
 import styles from '@/components/auth/auth.module.css';
 
 interface Props {
   copy: Dictionary['auth']['login'];
 }
 
-/** Google-only sign-in. After Google, Auth.js returns to ?callbackUrl= (default: onboarding). */
+/**
+ * Google-only sign-in. After Google, Auth.js returns to /register, which skips straight to
+ * ?callbackUrl= (the page the user came from, default /profile) once the profile exists.
+ */
 export default function LoginForm({ copy }: Props) {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -23,9 +26,11 @@ export default function LoginForm({ copy }: Props) {
 
   const onClick = () => {
     setLoading(true);
-    const callbackUrl = safeCallbackUrl(searchParams.get('callbackUrl'), '/register');
+    const destination = safeCallbackUrl(searchParams.get('callbackUrl'), DEFAULT_AFTER_SIGN_IN);
     // Navigates away to Google; if that throws, let the user try again.
-    signIn('google', { callbackUrl }).catch(() => setLoading(false));
+    signIn('google', { callbackUrl: withCallback('/register', destination) }).catch(() =>
+      setLoading(false),
+    );
   };
 
   return (

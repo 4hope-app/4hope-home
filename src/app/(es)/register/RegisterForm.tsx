@@ -14,8 +14,10 @@ import {
   DISPLAY_NAME_MAX,
   USERNAME_MAX,
   isValidUsername,
+  DEFAULT_AFTER_SIGN_IN,
   safeCallbackUrl,
   usernameFromEmail,
+  withCallback,
   type ProfileMeResponse,
 } from '@/lib/profile';
 import styles from '@/components/auth/auth.module.css';
@@ -29,12 +31,14 @@ type Account = Extract<ProfileMeResponse, { exists: false }>['account'];
 
 /**
  * Checks GET /api/profile/me on mount: not signed in → /login, profile already complete →
- * callbackUrl (default /profile), otherwise shows the form and POSTs it.
+ * callbackUrl (default /profile), otherwise shows the form and POSTs it. Every redirect to
+ * /login keeps callbackUrl, so the user still ends up on the page they came from.
  */
 export default function RegisterForm({ copy, legal }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = safeCallbackUrl(searchParams.get('callbackUrl'), '/profile');
+  const callbackUrl = safeCallbackUrl(searchParams.get('callbackUrl'), DEFAULT_AFTER_SIGN_IN);
+  const loginUrl = withCallback('/login', callbackUrl);
 
   const [account, setAccount] = useState<Account | null>(null);
   const [username, setUsername] = useState('');
@@ -50,7 +54,7 @@ export default function RegisterForm({ copy, legal }: Props) {
     fetch('/api/profile/me', { cache: 'no-store' })
       .then(async (res) => {
         if (!alive) return;
-        if (res.status === 401) return router.replace('/login');
+        if (res.status === 401) return router.replace(loginUrl);
         if (!res.ok) throw new Error(`GET /api/profile/me → ${res.status}`);
         const data = (await res.json()) as ProfileMeResponse;
         if (!alive) return;
@@ -65,7 +69,7 @@ export default function RegisterForm({ copy, legal }: Props) {
     return () => {
       alive = false;
     };
-  }, [router, callbackUrl, copy.error]);
+  }, [router, callbackUrl, loginUrl, copy.error]);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -82,7 +86,7 @@ export default function RegisterForm({ copy, legal }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, displayName, acceptedTerms: true }),
       });
-      if (res.status === 401) return router.replace('/login');
+      if (res.status === 401) return router.replace(loginUrl);
       if (res.status === 409) {
         setUsernameError(copy.usernameTaken);
         return setSaving(false);
@@ -216,7 +220,7 @@ export default function RegisterForm({ copy, legal }: Props) {
         <button
           type="button"
           className={styles.linkButton}
-          onClick={() => signOut({ callbackUrl: '/login' })}
+          onClick={() => signOut({ callbackUrl: loginUrl })}
         >
           {copy.switchAccount}
         </button>
