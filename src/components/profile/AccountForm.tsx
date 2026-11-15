@@ -136,7 +136,8 @@ export default function AccountForm({
   };
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    // noValidate: our own messages (in the page's language) instead of the browser's bubbles.
+    <form className={styles.form} onSubmit={onSubmit} noValidate>
       <ProfileCard kicker={copy.kicker}>
         <div className={styles.grid}>
           <div className={styles.fields}>
