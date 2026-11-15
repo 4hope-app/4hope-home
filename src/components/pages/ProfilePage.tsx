@@ -10,7 +10,7 @@ import ProfileHero from '../profile/ProfileHero';
 import RiotAccountCard from '../profile/RiotAccountCard';
 import Icon from '../ui/Icon';
 import { localizePath, t, type Lang } from '@/i18n/utils';
-import { envCollection, getAdminDb, type DocumentData } from '@/lib/firestore';
+import { FieldValue, envCollection, getAdminDb, type DocumentData } from '@/lib/firestore';
 import { profilePhotoSrc } from '@/lib/photo';
 import { isRiotLinkResult, isRiotServer, type RiotAccountView } from '@/lib/riot';
 import {
@@ -58,7 +58,10 @@ async function loadRiot(uid: string, profile: DocumentData): Promise<RiotAccount
       riot.linkedVia === 'rso' ? 'rso' : null,
     );
     if (retry.status === 'ok' && retry.record.verified) {
-      await getAdminDb().collection(envCollection('users')).doc(uid).update({ riot: retry.record });
+      await getAdminDb()
+        .collection(envCollection('users'))
+        .doc(uid)
+        .update({ riot: retry.record, updatedAt: FieldValue.serverTimestamp() });
       return toRiotView(retry.record);
     }
   }
@@ -86,6 +89,7 @@ export default async function ProfilePage({ lang, riotResult }: Props) {
       <Header lang={lang} path="/profile" />
       <main id="main" className={`container ${styles.main}`}>
         <ProfileHero
+          username={profile.username}
           displayName={displayName}
           email={email}
           photoUrl={uploadedPhoto ?? googlePhoto}
@@ -99,7 +103,7 @@ export default async function ProfilePage({ lang, riotResult }: Props) {
           <AccountForm
             copy={copy.account}
             username={profile.username}
-            displayName={displayName}
+            displayName={(profile.displayName as string | undefined) ?? ''}
             email={email}
             providerName={providerName}
             uploadedPhoto={uploadedPhoto}

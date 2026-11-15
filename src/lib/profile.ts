@@ -17,16 +17,79 @@ export function usernameFromEmail(email: string | null | undefined): string {
 const AUTH_PATHS = ['/login', '/en/login', '/register'];
 
 /**
- * A callbackUrl that stays on this site: a path like "/profile". Anything else (absolute URLs,
- * protocol-relative "//host" or "/\host", which browsers treat alike) falls back, so query strings can't send users off-site.
- * Auth pages fall back too, so a callback never points back at the sign-in flow.
+ * The 4HOPE domain. A callbackUrl may point at it or at any of its subdomains (the tools, e.g.
+ * https://bracket.4hope.app/…), always over https.
+ */
+export const TRUSTED_DOMAIN = '4hope.app';
+
+const isTrustedHost = (hostname: string) =>
+  hostname === TRUSTED_DOMAIN || hostname.endsWith(`.${TRUSTED_DOMAIN}`);
+
+/** Path with %-escapes decoded (so "/%6Cogin" counts as "/login"), lowercased, no trailing "/". */
+function normalizedPath(pathname: string): string {
+  let path = pathname;
+  try {
+    path = decodeURIComponent(pathname);
+  } catch {
+    // Malformed escapes: compare as-is.
+  }
+  return path.toLowerCase().replace(/\/+$/, '') || '/';
+}
+
+/**
+ * A callbackUrl that's safe to send the user to after signing in, else `fallback`. Accepted:
+ *   - a path on this site: "/profile", "/en?x=1#faq";
+ *   - an https URL on 4hope.app or one of its subdomains: "https://bracket.4hope.app/t/123".
+ * Everything else falls back, so a crafted link can't turn sign-in into an open redirect:
+ * other hosts and look-alikes ("evil4hope.app", "4hope.app.evil.com", "4hope.app@evil.com"),
+ * protocol-relative "//host" and "/\host" (browsers read "\" as "/"), other schemes
+ * ("javascript:", "data:", "http:"), credentials or explicit ports, and any whitespace or control
+ * character (browsers strip some of them, which can change how a URL is read).
+ * Sign-in pages fall back too, so a callback never points back at the sign-in flow.
+ * Paths come back normalized; absolute URLs come back as the parsed `href`.
  */
 export function safeCallbackUrl(value: string | null | undefined, fallback: string): string {
-  if (!value || !value.startsWith('/') || value.startsWith('//') || value.startsWith('/\\')) {
+  // Bounded length; no "\", whitespace or control characters anywhere.
+  if (!value || value.length > 2048 || /[\\\s\u0000-\u001f\u007f]/.test(value)) return fallback;
+
+  if (value.startsWith('/')) {
+    if (value.startsWith('//')) return fallback;
+    // Resolve against a placeholder origin: if the result left it, the path wasn't a path.
+    const base = 'https://callback.invalid';
+    let url: URL;
+    try {
+      url = new URL(value, base);
+    } catch {
+      return fallback;
+    }
+    if (url.origin !== base) return fallback;
+    if (AUTH_PATHS.includes(normalizedPath(url.pathname))) return fallback;
+    return `${url.pathname}${url.search}${url.hash}`;
+  }
+
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
     return fallback;
   }
-  const pathname = value.split(/[?#]/)[0].replace(/\/+$/, '') || '/';
-  return AUTH_PATHS.includes(pathname) ? fallback : value;
+  if (url.protocol !== 'https:' || url.username || url.password || url.port) return fallback;
+  if (!isTrustedHost(url.hostname)) return fallback;
+  if (url.hostname === TRUSTED_DOMAIN && AUTH_PATHS.includes(normalizedPath(url.pathname))) {
+    return fallback;
+  }
+  return url.href;
+}
+
+/** Navigates to a callbackUrl from safeCallbackUrl: client-side for paths, a full load for URLs. */
+export function goToCallback(
+  url: string,
+  router: { push(href: string): void; replace(href: string): void },
+  mode: 'push' | 'replace' = 'push',
+): void {
+  if (url.startsWith('/')) router[mode](url);
+  else if (mode === 'replace') window.location.replace(url);
+  else window.location.assign(url);
 }
 
 /** `path` with `?callbackUrl=` set to `callbackUrl`: withCallback('/login', '/en') → '/login?callbackUrl=%2Fen'. */
@@ -49,6 +112,7 @@ export interface Profile {
   termsVersion?: string;
   createdAt?: string | null;
   termsAcceptedAt?: string | null;
+  updatedAt?: string | null;
 }
 
 export type ProfileMeResponse =

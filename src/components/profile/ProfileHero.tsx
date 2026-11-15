@@ -1,7 +1,7 @@
 /**
  * Top of the profile page: gold stripe band, avatar (uploaded photo, else Google's, else the
- * clover mark), display name with "No team yet" when the player has no squad, email, and the
- * sign-out button.
+ * clover mark), username as the title with "No team yet" when the player has no squad, then the
+ * full name and email, and the sign-out button.
  */
 import Icon from '../ui/Icon';
 import Tag from '../ui/Tag';
@@ -9,6 +9,8 @@ import SignOutButton from './SignOutButton';
 import styles from './ProfileHero.module.css';
 
 interface Props {
+  username: string;
+  /** Full name; hidden when it's the same as the username. */
   displayName: string;
   email: string | null;
   photoUrl: string | null;
@@ -20,6 +22,7 @@ interface Props {
 }
 
 export default function ProfileHero({
+  username,
   displayName,
   email,
   photoUrl,
@@ -42,9 +45,12 @@ export default function ProfileHero({
         </span>
         <div className={styles.text}>
           <div className={styles.nameRow}>
-            <h1 className={styles.name}>{displayName}</h1>
+            <h1 className={styles.name}>{username}</h1>
             {!hasTeam && <Tag size="sm">{noTeamLabel}</Tag>}
           </div>
+          {displayName && displayName !== username && (
+            <p className={styles.fullName}>{displayName}</p>
+          )}
           {email && <p className={styles.email}>{email}</p>}
         </div>
         <SignOutButton label={signOutLabel} callbackUrl={signOutTo} className={styles.signOut}>
