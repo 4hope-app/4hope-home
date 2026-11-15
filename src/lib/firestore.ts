@@ -22,13 +22,21 @@ const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 
 // ─── Sentinels ────────────────────────────────────────────────────────────────
 
-class Sentinel {
-  constructor(readonly kind: 'delete' | 'serverTimestamp') {}
+// Marked with a global symbol, not checked with `instanceof`: Next can bundle this module once
+// per route, and the cached client (globalThis) may come from another copy than the caller's
+// FieldValue, so a class check would fail across copies.
+const SENTINEL = Symbol.for('4hope.firestore.fieldValue');
+
+interface Sentinel {
+  [SENTINEL]: 'delete' | 'serverTimestamp';
 }
 
+const isSentinel = (v: unknown): v is Sentinel =>
+  typeof v === 'object' && v !== null && SENTINEL in v;
+
 export const FieldValue = {
-  delete: () => new Sentinel('delete'),
-  serverTimestamp: () => new Sentinel('serverTimestamp'),
+  delete: (): Sentinel => ({ [SENTINEL]: 'delete' }),
+  serverTimestamp: (): Sentinel => ({ [SENTINEL]: 'serverTimestamp' }),
 };
 
 // ─── Credentials and access token ─────────────────────────────────────────────
@@ -130,7 +138,7 @@ function encodeValue(v: unknown): Value {
 function encodeFields(data: Record<string, unknown>): Record<string, Value> {
   const fields: Record<string, Value> = {};
   for (const [key, value] of Object.entries(data)) {
-    if (value !== undefined && !(value instanceof Sentinel)) fields[key] = encodeValue(value);
+    if (value !== undefined && !isSentinel(value)) fields[key] = encodeValue(value);
   }
   return fields;
 }
@@ -184,7 +192,7 @@ interface Entry {
 /** Leaf entries of an object for a merge (maps are merged key by key, like the Admin SDK). */
 function leaves(data: Record<string, unknown>, prefix: string[] = []): Entry[] {
   return Object.entries(data).flatMap(([key, value]) =>
-    isPlainObject(value) && Object.keys(value).length
+    isPlainObject(value) && !isSentinel(value) && Object.keys(value).length
       ? leaves(value, [...prefix, key])
       : [{ path: [...prefix, key], value }],
   );
@@ -200,12 +208,12 @@ function buildWrite(name: string, entries: Entry[], mustExist: boolean) {
   const transforms: { fieldPath: string; setToServerValue: 'REQUEST_TIME' }[] = [];
   for (const { path, value } of entries) {
     if (value === undefined) continue;
-    if (value instanceof Sentinel && value.kind === 'serverTimestamp') {
+    if (isSentinel(value) && value[SENTINEL] === 'serverTimestamp') {
       transforms.push({ fieldPath: fieldPath(path), setToServerValue: 'REQUEST_TIME' });
       continue;
     }
     mask.push(fieldPath(path));
-    if (!(value instanceof Sentinel)) setDeep(body, path, value);
+    if (!isSentinel(value)) setDeep(body, path, value);
   }
   return {
     update: { name, fields: encodeFields(body) },
@@ -409,9 +417,8 @@ class Transaction {
   get(ref: DocumentReference): Promise<DocumentSnapshot>;
   get(query: Query): Promise<QuerySnapshot>;
   get(target: DocumentReference | Query): Promise<DocumentSnapshot | QuerySnapshot> {
-    return target instanceof DocumentReference
-      ? this.db.getDoc(target, this.id)
-      : this.db.runQuery(target, this.id);
+    // Duck-typed for the same reason as the sentinels: only references have a `name`.
+    return 'name' in target ? this.db.getDoc(target, this.id) : this.db.runQuery(target, this.id);
   }
   set(ref: DocumentReference, data: DocumentData, options?: { merge?: boolean }): this {
     this.writes.push(setWrite(ref.name, data, options?.merge === true));
@@ -425,10 +432,13 @@ class Transaction {
 
 // ─── Entry points ─────────────────────────────────────────────────────────────
 
-const instance = globalThis as typeof globalThis & { __firestore?: Firestore };
-
+/**
+ * A client for this module's code. Cheap to create (the access token is what's cached), so it
+ * isn't kept on globalThis: a cached client could come from another bundled copy of this module,
+ * or from an older version after a dev hot reload.
+ */
 export function getAdminDb(): Firestore {
-  return (instance.__firestore ??= new Firestore());
+  return new Firestore();
 }
 
 /** Collection name for the current environment: `users` in production, `users-uat` elsewhere. */
