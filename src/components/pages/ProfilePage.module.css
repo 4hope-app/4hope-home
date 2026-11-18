@@ -1,0 +1,16 @@
+/* One centered column: the header and both cards share its width (640px + the side gutters). */
+.main {
+  max-width: calc(640px + 2 * var(--space-400));
+  min-height: calc(100vh - 69px);
+  padding-bottom: var(--space-1600);
+}
+.divider {
+  margin: 0 0 var(--space-800);
+  border: 0;
+  border-top: 1px solid var(--surface-arena-line);
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-600);
+}

@@ -51,13 +51,21 @@ export default function Header({ lang, path, showAccount = true }: Props) {
         <div className={styles.actions}>
           <LanguageSwitcher lang={lang} path={path} />
           {showAccount && (
-            <AccountMenu copy={d.auth.menu} loginHref={localizePath('/login', lang)} />
+            <AccountMenu
+              copy={d.auth.menu}
+              loginHref={localizePath('/login', lang)}
+              profileHref={localizePath('/profile', lang)}
+            />
           )}
         </div>
 
         <div className={styles.mobile}>
           {showAccount && (
-            <AccountMenu copy={d.auth.menu} loginHref={localizePath('/login', lang)} />
+            <AccountMenu
+              copy={d.auth.menu}
+              loginHref={localizePath('/login', lang)}
+              profileHref={localizePath('/profile', lang)}
+            />
           )}
           <MobileMenu
             items={nav.map(({ key, label, href, external }) => ({ key, label, href, external }))}

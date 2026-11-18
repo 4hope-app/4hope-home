@@ -1,0 +1,109 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+}
+.grid {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-400);
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-400);
+  width: 100%;
+  min-width: 0;
+}
+@media (min-width: 600px) {
+  .grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .fields {
+    flex: 1;
+  }
+}
+.photoColumn {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-150);
+  max-width: 160px;
+  text-align: center;
+}
+/* The whole box is the file picker; the pencil shows on hover and keyboard focus. */
+.photo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--ink-700);
+  cursor: pointer;
+}
+.photo:focus-within {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 2px;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo .clover {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  opacity: 0.85;
+}
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ink-1000) 55%, transparent);
+  color: var(--text-arena);
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+.photo:hover .photoOverlay,
+.photo:focus-within .photoOverlay {
+  opacity: 1;
+}
+.photoRemove {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  color: var(--text-arena-muted);
+  cursor: pointer;
+}
+.photoRemove:hover {
+  color: var(--text-arena);
+  text-decoration: underline;
+}
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-300);
+}
+.status,
+.error {
+  margin: 0;
+  font-size: 13px;
+}
+.status {
+  color: var(--text-arena-muted);
+}
+.error {
+  color: var(--red-400);
+}

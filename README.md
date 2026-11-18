@@ -20,7 +20,7 @@ The site presents the project and its tools (the first one, [TFT Competition Bra
 | Language  | TypeScript (strict)                                                                                              |
 | Styling   | CSS Modules + global CSS; design tokens generated from `design-system/tokens.json` into `src/styles/tokens.css`  |
 | Auth      | [Auth.js](https://authjs.dev) v5 (`next-auth@beta`), Google provider, JWT sessions                               |
-| Data      | Firebase Admin (Firestore), server only                                                                          |
+| Data      | Firestore via its REST API (service account), server only                                                        |
 | Hosting   | Cloudflare Workers via [OpenNext](https://opennext.js.org/cloudflare) (`next start` on any Node host also works) |
 | Tooling   | ESLint (`eslint-config-next`), Prettier                                                                          |
 | Analytics | Plausible or Umami (optional, cookie-free)                                                                       |
@@ -96,7 +96,7 @@ src/
     ui/                   Design-system components (Button, Card, Tag, Badge, Icon, Input, FormField, …)
   data/                   tools.ts, links.ts, navigation.ts
   i18n/                   es.json, en.json (all copy), utils.ts
-  lib/                    auth, firebaseAdmin, session/profile guards, SEO helpers
+  lib/                    auth, firestore, session/profile guards, SEO helpers
   styles/                 tokens.css (generated), fonts.css, global.css, islands.css
 design-system/            tokens.json, icon-data.js, index.d.ts (copies from the design system)
 public/                   fonts, brand assets, icons, OG images, design-system bundle, _headers

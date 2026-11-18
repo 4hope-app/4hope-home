@@ -3,7 +3,7 @@ import { languages, type Lang } from '@/i18n/utils';
 import { absoluteUrl, alternateLanguages } from '@/lib/seo';
 
 /** Every indexable page in both languages, with hreflang alternates (same codes as the pages). */
-const paths = ['/', '/privacy'];
+const paths = ['/', '/privacy', '/terms'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return paths.flatMap((path) =>
