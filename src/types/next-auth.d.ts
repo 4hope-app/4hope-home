@@ -5,6 +5,8 @@ declare module 'next-auth' {
     user: {
       /** Google account id (`sub`), also the id of the users/{uid} Firestore document. */
       id: string;
+      /** Auth.js provider id used to sign in, e.g. "google". */
+      provider: string;
     } & DefaultSession['user'];
   }
 }
@@ -13,5 +15,6 @@ declare module 'next-auth' {
 declare module '@auth/core/jwt' {
   interface JWT {
     uid?: string;
+    provider?: string;
   }
 }

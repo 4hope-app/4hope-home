@@ -26,9 +26,21 @@
   border-color: var(--border-danger-default);
   box-shadow: none;
 }
+.box:has(.input:read-only:not(:disabled)) {
+  background: transparent;
+}
+.box:has(.input:read-only:not(:disabled)):focus-within {
+  border-color: var(--border-default-default);
+  box-shadow: none;
+}
 .box:has(.input:disabled) {
   background: var(--background-disabled-default);
   opacity: 0.6;
+}
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--text-default-secondary);
 }
 .input {
   flex: 1;

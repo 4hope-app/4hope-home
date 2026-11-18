@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { Fragment, type CSSProperties, type ReactNode } from 'react';
 import Button from '../ui/Button';
 import { links } from '@/data/links';
 import { sectionIds } from '@/data/navigation';
@@ -15,6 +15,19 @@ const bars = [
   { '--w': '320px', '--top': '170px', '--right': '140px', '--o': '0.85' },
   { '--w': '460px', '--top': '360px', '--right': '-60px' },
 ] satisfies Record<`--${string}`, string>[];
+
+/** `text` with its first `accent` wrapped in a span of `className` (all of it plain if absent). */
+function accented(text: string, accent: string, className: string): ReactNode {
+  const at = accent ? text.indexOf(accent) : -1;
+  if (at < 0) return text;
+  return (
+    <>
+      {text.slice(0, at)}
+      <span className={className}>{accent}</span>
+      {text.slice(at + accent.length)}
+    </>
+  );
+}
 
 export default function Hero({ lang }: Props) {
   const h = t(lang).hero;
@@ -33,7 +46,13 @@ export default function Hero({ lang }: Props) {
           4HOPE
         </p>
         <h1 id="hero-title" className={`display-hero ${styles.title}`}>
-          {h.headline}
+          {/* One line per "\n" in the headline; headlineAccent is painted gold. */}
+          {h.headline.split('\n').map((line, i) => (
+            <Fragment key={i}>
+              {i > 0 && <br />}
+              {accented(line, h.headlineAccent, styles.accent)}
+            </Fragment>
+          ))}
         </h1>
         <p className={`body-lead ${styles.sub}`}>{h.sub}</p>
         <div className={styles.ctas}>

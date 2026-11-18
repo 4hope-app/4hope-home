@@ -20,7 +20,7 @@ The site presents the project and its tools (the first one, [TFT Competition Bra
 | Language  | TypeScript (strict)                                                                                              |
 | Styling   | CSS Modules + global CSS; design tokens generated from `design-system/tokens.json` into `src/styles/tokens.css`  |
 | Auth      | [Auth.js](https://authjs.dev) v5 (`next-auth@beta`), Google provider, JWT sessions                               |
-| Data      | Firebase Admin (Firestore), server only                                                                          |
+| Data      | Firestore via its REST API (service account), server only                                                        |
 | Hosting   | Cloudflare Workers via [OpenNext](https://opennext.js.org/cloudflare) (`next start` on any Node host also works) |
 | Tooling   | ESLint (`eslint-config-next`), Prettier                                                                          |
 | Analytics | Plausible or Umami (optional, cookie-free)                                                                       |
@@ -96,7 +96,7 @@ src/
     ui/                   Design-system components (Button, Card, Tag, Badge, Icon, Input, FormField, …)
   data/                   tools.ts, links.ts, navigation.ts
   i18n/                   es.json, en.json (all copy), utils.ts
-  lib/                    auth, firebaseAdmin, session/profile guards, SEO helpers
+  lib/                    auth, firestore, session/profile guards, SEO helpers
   styles/                 tokens.css (generated), fonts.css, global.css, islands.css
 design-system/            tokens.json, icon-data.js, index.d.ts (copies from the design system)
 public/                   fonts, brand assets, icons, OG images, design-system bundle, _headers
@@ -130,7 +130,7 @@ Commit messages follow [Conventional Commits](https://www.conventionalcommits.or
 - [ ] **DNS** — point `4hope.app` (and `www`) to the Cloudflare Worker.
 - [ ] **Auth** — create the Google OAuth client and the Firebase service account; set the secrets in Cloudflare.
 - [ ] **Terms page** — `/terms` doesn't exist yet; the sign-in and onboarding screens link to it.
-- [ ] **Discord** — replace `https://discord.gg/TODO-4hope-invite` in `src/data/links.ts`.
+- [x] **Discord** — invite `https://discord.gg/mXNMRPpn65` in `src/data/links.ts`.
 - [ ] **Socials** — set the X, Instagram and Twitch URLs in `src/data/links.ts` and set `ready: true`.
 - [ ] **Contact email** — create the `hola@4hope.app` mailbox (or change `links.email`).
 - [ ] **OG images** — replace the placeholders `public/og/og-es.png` and `og-en.png` (1200×630).
