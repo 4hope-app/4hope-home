@@ -13,11 +13,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async jwt({ token, account }) {
       // providerAccountId = Google's stable "sub" → id of the users/{uid} document.
-      if (account?.providerAccountId) token.uid = account.providerAccountId;
+      if (account?.providerAccountId) {
+        token.uid = account.providerAccountId;
+        token.provider = account.provider;
+      }
       return token;
     },
     async session({ session, token }) {
-      if (token.uid && session.user) session.user.id = token.uid;
+      if (token.uid && session.user) {
+        session.user.id = token.uid;
+        // Sessions issued before `provider` was stored were all Google.
+        session.user.provider = token.provider ?? 'google';
+      }
       return session;
     },
   },

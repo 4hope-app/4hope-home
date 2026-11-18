@@ -6,7 +6,7 @@ Guidance for Claude Code when working in this repository. Human-facing setup is 
 
 ## Project
 
-**4hope-home** is the official landing page of 4HOPE (https://4hope.app): free tools for the LATAM Teamfight Tactics community. Next.js 16 (App Router) + React 19 + TypeScript strict, CSS Modules, Auth.js v5 (Google) + Firebase Admin (Firestore), deployed to Cloudflare Workers with OpenNext.
+**4hope-home** is the official landing page of 4HOPE (https://4hope.app): free tools for the LATAM Teamfight Tactics community. Next.js 16 (App Router) + React 19 + TypeScript strict, CSS Modules, Auth.js v5 (Google) + Firestore (REST), deployed to Cloudflare Workers with OpenNext.
 
 - Spanish is the default language (`/`, `es-419`); English lives under `/en`.
 - Tools live on their own subdomains (e.g. `bracket.4hope.app`, the sibling repo `4hope-bracket`); the landing only links to them.
@@ -40,11 +40,11 @@ Node 22.6+ (`.nvmrc`). After changing code, run `npm run check`, `npm run lint` 
 ### Routes and layouts
 
 - Two **root layouts** in route groups, so `<html lang>` is correct in the server HTML:
-  - `src/app/(es)/layout.tsx` → `/`, `/privacy`, `/login`, `/register`, `/profile`
+  - `src/app/(es)/layout.tsx` → `/`, `/privacy`, `/terms`, `/login`, `/register`, `/profile`
   - `src/app/(en)/layout.tsx` → `/en`, `/en/privacy`, `/en/login`
 - There is **no `src/app/layout.tsx`**. Both layouts render `src/components/layout/Document.tsx` (the `<html>` shell: global CSS imports, font preloads, Organization JSON-LD, analytics, skip link, `AuthProvider`).
 - Unmatched URLs render `src/app/global-not-found.tsx` (needs `experimental.globalNotFound` in `next.config.ts`).
-- Page bodies shared by both languages live in `src/components/pages/` (HomePage, PrivacyPage, LoginPage, NotFoundPage); each `page.tsx` is a 5-line wrapper passing `lang`.
+- Page bodies shared by both languages live in `src/components/pages/` (HomePage, PrivacyPage, TermsPage, LoginPage, ProfilePage, NotFoundPage; Privacy and Terms share `LegalDocument`); each `page.tsx` is a 5-line wrapper passing `lang`.
 - A new page in both languages = one component in `components/pages/` + a `page.tsx` in each route group + its path in `src/app/sitemap.ts` (if indexable).
 - URLs have **no trailing slash** (`/en`, `/privacy`). Build internal links with `localizePath(path, lang)` from `src/i18n/utils.ts`.
 - Moving between languages (different root layouts) is a full page load. Internal links are plain `<a>` (the `no-html-link-for-pages` lint rule is off on purpose).
@@ -98,12 +98,13 @@ Node 22.6+ (`.nvmrc`). After changing code, run `npm run check`, `npm run lint` 
 - `src/lib/auth.ts` — Auth.js v5 (`next-auth@5.0.0-beta.*`), Google provider, `session: { strategy: 'jwt' }`, no adapter, `pages.signIn = '/login'`. `session.user.id` = Google `sub` (`account.providerAccountId`) = Firestore doc id.
 - Type augmentation in `src/types/next-auth.d.ts`. **Augment `JWT` in `'@auth/core/jwt'`**, not `'next-auth/jwt'` (that module only re-exports it, and augmenting it doesn't type `token.uid`).
 - **No middleware/proxy.** Route handlers: `const s = await requireSession(); if (s instanceof NextResponse) return s;` (`src/lib/requireSession.ts`, 401 JSON). Server pages: `const { session, profile } = await requireProfile('/path')` (`src/lib/requireProfile.ts`; → `/login?callbackUrl=…` or `/register`).
-- Firestore via `getAdminDb()` and `envCollection('users')` (`src/lib/firebaseAdmin.ts`): `users` when `APP_ENV=production`, `users-uat` otherwise. The instance is cached on `globalThis` (dev hot reload) and uses `preferRest: true` (gRPC doesn't work on Workers). firebase-admin on Cloudflare Workers is **not verified yet** — test with `npm run cf:preview` and real credentials before relying on it.
-- Profile document `users/{uid}`: `username`, `usernameKey` (lowercase, uniqueness is case-insensitive and checked in a transaction), `displayName`, `email`, `photo.gmailUrl`, `createdAt` (first write only), `termsAcceptedAt`, `termsVersion` (`TERMS_VERSION` in `src/lib/legal.ts`; bump it when Terms/Privacy change), `plan: 'basic'` (only if no plan yet).
-- `/api/profile/me`: `GET` → `{ exists: false, account }` or `{ exists: true, profile }`; `POST` → onboarding (400 invalid, 409 username taken); `PATCH` → displayName (404 without profile).
+- Firestore via `getAdminDb()` and `envCollection('users')` (`src/lib/firestore.ts`): `users` when `APP_ENV=production`, `users-uat` otherwise. **Don't add `firebase-admin`**: its Firestore client generates code with `new Function`, which Cloudflare Workers forbid (`EvalError: Code generation from strings disallowed`). `src/lib/firestore.ts` is a small REST client with the same shape (`collection().doc().get()/update()/set(…, { merge })`, `where('f', '==', v).limit(n).get()`, `runTransaction`, `FieldValue.delete()/serverTimestamp()`), authenticated with a service-account JWT signed by WebCrypto. It decodes timestamps as `Date` and bytes as `Buffer`; extend it there if you need more of the API.
+- Profile document `users/{uid}` (shared with the sibling `4hope-webpage` app, which also writes `teamId`, `riot`, `photo.currentBytes`): `username`, `usernameKey` (lowercase, uniqueness is case-insensitive and checked in a transaction), `displayName`, `email`, `provider`, `photo.gmailUrl`, `photo.currentBytes` + `photo.contentType` (uploaded photo, cropped and encoded in the browser; `src/lib/photo.ts`), `createdAt` (a Timestamp here, an ISO string when 4hope-webpage created it: read dates with `timestampToDate`) (first write only), `termsAcceptedAt`, `termsVersion` (`TERMS_VERSION` in `src/lib/legal.ts`; bump it when Terms/Privacy change), `plan: 'basic'` (only if no plan yet).
+- `/api/profile/me`: `GET` → `{ exists: false, account }` or `{ exists: true, profile }`; `POST` → onboarding (400 invalid, 409 username taken); `PATCH` → displayName and/or photo (`{ photo: dataUrl }` / `{ removePhoto: true }`; 404 without profile). `/api/profile/photo` → the header avatar (uploaded photo, else redirect to Google's); after a change call `bumpPhotoVersion()` so every page reloads it.
 - Shared rules (client + server) in `src/lib/profile.ts`: `USERNAME_PATTERN` (`^[A-Za-z0-9_-]{1,24}$`), `DISPLAY_NAME_MAX` (40), `usernameFromEmail`, `safeCallbackUrl` (only same-site paths; use it for every `callbackUrl`).
-- Flow: `/login` → Google → `/register` (first time) → `/profile`. Header shows "Iniciar sesión" or the avatar menu (`AccountMenu`, `useSession()`); the sign-in page hides it (`<Header showAccount={false} />`).
-- Auth screens use `AuthShell` (`src/components/auth/`), based on the DS LoginPage/RegistrationPage templates. `/login` sits between the site header and footer (`framed`); `/register` and `/profile` are full-screen and Spanish-only for now.
+- Flow: `/login?callbackUrl=<page>` → Google → `/register?callbackUrl=<page>` (skips straight on when the profile exists) → back to `<page>` (default `/profile`). The header's sign-in link adds the current page; `safeCallbackUrl` rejects off-site and auth-page targets. Header shows "Iniciar sesión" or the avatar menu (`AccountMenu`, `useSession()`); the sign-in page hides it (`<Header showAccount={false} />`).
+- Auth screens use `AuthShell` (`src/components/auth/`), based on the DS LoginPage/RegistrationPage templates. `/login` sits between the site header and footer (`framed`); `/register` is full-screen and Spanish-only for now. `/profile` and `/en/profile` (`ProfilePage`, `src/components/profile/`): photo crop dialog, display name, Riot account card.
+- Riot account (`users/{uid}.riot`, same fields as 4hope-webpage): linked only through Riot Sign-On (`/api/profile/riot/connect` → Riot → `/callback`; needs `RIOT_RSO_CLIENT_ID`/`RIOT_RSO_CLIENT_SECRET`, otherwise the button is disabled). Rank and icon come from the Riot API (`RIOT_API_KEY`, `src/lib/riotApi.ts`); `PATCH /api/profile/riot` refreshes (cooldown `RIOT_REFRESH_COOLDOWN_SECONDS`), `DELETE` unlinks. Links made in 4hope-webpage by typing a Riot ID show as unconfirmed.
 
 ## Environment and secrets
 
@@ -119,7 +120,8 @@ Node 22.6+ (`.nvmrc`). After changing code, run `npm run check`, `npm run lint` 
 
 ## Known open items
 
-- `/terms` page doesn't exist (linked from sign-in and onboarding).
+- Terms (`terms` in the dictionaries) are a draft pending legal review; the Privacy text predates sign-in, profiles and Riot linking.
+- Riot Sign-On needs a production-approved RSO client from Riot; until then nobody can link a new Riot account here.
 - `src/data/links.ts`: Discord invite and social URLs are `TODO` placeholders.
 - OG images are placeholders; TT Bluescreens is a trial font (license pending).
 - Search for `TODO:` to find the rest. The launch checklist is in `README.md`.

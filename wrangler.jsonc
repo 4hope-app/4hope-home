@@ -9,4 +9,10 @@
     "binding": "ASSETS",
   },
   "observability": { "enabled": true },
+  // Plain (non-secret) runtime vars. Declared here because `wrangler deploy` / `versions upload`
+  // drop text variables added in the dashboard; secrets (AUTH_*, FIREBASE_*, RIOT_*, APP_ENV)
+  // stay in the dashboard. Auth.js needs this outside Vercel or it fails with UntrustedHost.
+  "vars": {
+    "AUTH_TRUST_HOST": "true",
+  },
 }
