@@ -62,6 +62,15 @@
   line-height: 1.15;
   color: var(--text-arena);
 }
+.fullName {
+  margin: var(--space-100) 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-arena);
+}
 .email {
   margin: var(--space-100) 0 0;
   overflow: hidden;

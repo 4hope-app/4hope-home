@@ -15,6 +15,7 @@ import {
   USERNAME_MAX,
   isValidUsername,
   DEFAULT_AFTER_SIGN_IN,
+  goToCallback,
   safeCallbackUrl,
   usernameFromEmail,
   withCallback,
@@ -32,7 +33,8 @@ type Account = Extract<ProfileMeResponse, { exists: false }>['account'];
 /**
  * Checks GET /api/profile/me on mount: not signed in → /login, profile already complete →
  * callbackUrl (default /profile), otherwise shows the form and POSTs it. Every redirect to
- * /login keeps callbackUrl, so the user still ends up on the page they came from.
+ * /login keeps callbackUrl, so the user still ends up on the page they came from: a path here, or
+ * a page on a 4hope.app subdomain (validated by safeCallbackUrl).
  */
 export default function RegisterForm({ copy, legal }: Props) {
   const router = useRouter();
@@ -46,6 +48,7 @@ export default function RegisterForm({ copy, legal }: Props) {
   const [accepted, setAccepted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [nameError, setNameError] = useState<string | null>(null);
   const [termsError, setTermsError] = useState<string | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
 
@@ -58,9 +61,10 @@ export default function RegisterForm({ copy, legal }: Props) {
         if (!res.ok) throw new Error(`GET /api/profile/me → ${res.status}`);
         const data = (await res.json()) as ProfileMeResponse;
         if (!alive) return;
-        if (data.exists) return router.replace(callbackUrl);
+        if (data.exists) return goToCallback(callbackUrl, router, 'replace');
         setAccount(data.account);
         setUsername(usernameFromEmail(data.account.email));
+        setDisplayName((data.account.name ?? '').slice(0, DISPLAY_NAME_MAX));
       })
       .catch((err: unknown) => {
         console.error(err);
@@ -74,10 +78,12 @@ export default function RegisterForm({ copy, legal }: Props) {
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const usernameOk = isValidUsername(username);
+    const nameOk = displayName.trim().length > 0;
     setUsernameError(usernameOk ? null : copy.usernameInvalid);
+    setNameError(nameOk ? null : copy.displayNameRequired);
     setTermsError(accepted ? null : copy.acceptRequired);
     setFormError(null);
-    if (!usernameOk || !accepted) return;
+    if (!usernameOk || !nameOk || !accepted) return;
 
     setSaving(true);
     try {
@@ -92,7 +98,7 @@ export default function RegisterForm({ copy, legal }: Props) {
         return setSaving(false);
       }
       if (!res.ok) throw new Error(`POST /api/profile/me → ${res.status}`);
-      router.push(callbackUrl);
+      goToCallback(callbackUrl, router);
     } catch (err) {
       console.error(err);
       setFormError(copy.error);
@@ -125,6 +131,30 @@ export default function RegisterForm({ copy, legal }: Props) {
 
       <form className={styles.form} onSubmit={onSubmit} noValidate>
         <FormField
+          label={copy.displayName}
+          htmlFor="displayName"
+          hint={copy.displayNameHint}
+          error={nameError}
+          messageId="displayName-message"
+          required
+        >
+          <Input
+            id="displayName"
+            name="displayName"
+            value={displayName}
+            onChange={(e) => {
+              setDisplayName(e.target.value);
+              setNameError(null);
+            }}
+            maxLength={DISPLAY_NAME_MAX}
+            autoComplete="name"
+            required
+            invalid={!!nameError}
+            aria-describedby="displayName-message"
+          />
+        </FormField>
+
+        <FormField
           label={copy.username}
           htmlFor="username"
           hint={copy.usernameHint}
@@ -147,24 +177,6 @@ export default function RegisterForm({ copy, legal }: Props) {
             required
             invalid={!!usernameError}
             aria-describedby="username-message"
-          />
-        </FormField>
-
-        <FormField
-          label={copy.displayName}
-          htmlFor="displayName"
-          hint={copy.displayNameHint}
-          messageId="displayName-message"
-        >
-          <Input
-            id="displayName"
-            name="displayName"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-            placeholder={account.name ?? undefined}
-            maxLength={DISPLAY_NAME_MAX}
-            autoComplete="nickname"
-            aria-describedby="displayName-message"
           />
         </FormField>
 

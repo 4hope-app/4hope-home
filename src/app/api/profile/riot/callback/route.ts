@@ -5,7 +5,7 @@
  */
 import { cookies } from 'next/headers';
 import { auth } from '@/lib/auth';
-import { envCollection, getAdminDb } from '@/lib/firestore';
+import { FieldValue, envCollection, getAdminDb } from '@/lib/firestore';
 import { serverFromPlatform } from '@/lib/riot';
 import { buildRiotRecord, rsoIdentity } from '@/lib/riotApi';
 import { RSO_COOKIE, backToProfile, readRsoCookie, rsoRedirectUri } from '@/lib/riotLink';
@@ -38,6 +38,8 @@ export async function GET(request: Request) {
   if (result.status !== 'ok') return backToProfile(request, returnTo, 'failed');
 
   // update() replaces the whole map, so fields of a previously linked account don't linger.
-  await users.doc(flow.uid).update({ riot: result.record });
+  await users
+    .doc(flow.uid)
+    .update({ riot: result.record, updatedAt: FieldValue.serverTimestamp() });
   return backToProfile(request, returnTo, 'linked');
 }

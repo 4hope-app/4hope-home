@@ -9,7 +9,7 @@ import { buttonClass } from '../ui/buttonClass';
 import PhotoCropDialog from './PhotoCropDialog';
 import ProfileCard from './ProfileCard';
 import type { Dictionary } from '@/i18n/utils';
-import { DISPLAY_NAME_MAX, bumpPhotoVersion } from '@/lib/profile';
+import { DISPLAY_NAME_MAX, USERNAME_MAX, bumpPhotoVersion, isValidUsername } from '@/lib/profile';
 import styles from './AccountForm.module.css';
 
 interface Props {
@@ -28,8 +28,9 @@ interface Props {
 }
 
 /**
- * Settings → Account: edit the display name and the profile photo (pick → crop → save, through
- * PATCH /api/profile/me). Username and email are read-only.
+ * Settings → Account: edit the full name (`displayName`), the username and the profile photo
+ * (pick → crop → save), all through PATCH /api/profile/me. Both names are required; a username
+ * someone else has comes back as 409. The email is read-only.
  */
 export default function AccountForm({
   copy,
@@ -44,6 +45,10 @@ export default function AccountForm({
   const router = useRouter();
   const [savedName, setSavedName] = useState(displayName);
   const [draft, setDraft] = useState(displayName);
+  const [savedUsername, setSavedUsername] = useState(username);
+  const [usernameDraft, setUsernameDraft] = useState(username);
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [savedUpload, setSavedUpload] = useState(uploadedPhoto);
   /** New cropped photo (data URL), 'remove', or null for no change. */
   const [pendingPhoto, setPendingPhoto] = useState<string | 'remove' | null>(null);
@@ -53,7 +58,8 @@ export default function AccountForm({
   const [state, setState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
   const nameChanged = draft.trim() !== savedName.trim();
-  const changed = nameChanged || pendingPhoto !== null;
+  const usernameChanged = usernameDraft !== savedUsername;
+  const changed = nameChanged || usernameChanged || pendingPhoto !== null;
   // Uploaded photo first, then the Google one.
   const upload = pendingPhoto === 'remove' ? null : (pendingPhoto ?? savedUpload);
   const shownPhoto = upload ?? fallbackPhoto;
@@ -82,6 +88,12 @@ export default function AccountForm({
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!changed) return;
+    const nameOk = draft.trim().length > 0;
+    const usernameOk = isValidUsername(usernameDraft);
+    setNameError(nameOk ? null : copy.displayNameRequired);
+    setUsernameError(usernameOk ? null : copy.usernameInvalid);
+    if (!nameOk || !usernameOk) return;
+
     setState('saving');
     try {
       const res = await fetch('/api/profile/me', {
@@ -89,6 +101,7 @@ export default function AccountForm({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...(nameChanged ? { displayName: draft } : {}),
+          ...(usernameChanged ? { username: usernameDraft } : {}),
           ...(pendingPhoto === 'remove'
             ? { removePhoto: true }
             : pendingPhoto
@@ -96,11 +109,17 @@ export default function AccountForm({
               : {}),
         }),
       });
+      if (res.status === 409) {
+        setUsernameError(copy.usernameTaken);
+        return setState('idle');
+      }
       if (!res.ok) throw new Error(`PATCH /api/profile/me → ${res.status}`);
-      const data = (await res.json()) as { profile: { displayName: string } };
-      // An empty name falls back to the username on the server; show what was stored.
+      const data = (await res.json()) as { profile: { displayName: string; username: string } };
+      // Show what was stored (the server trims the name).
       setSavedName(data.profile.displayName);
       setDraft(data.profile.displayName);
+      setSavedUsername(data.profile.username);
+      setUsernameDraft(data.profile.username);
       if (pendingPhoto !== null) {
         setSavedUpload(pendingPhoto === 'remove' ? null : pendingPhoto);
         // The header avatar (AccountMenu) reloads its image.
@@ -117,35 +136,58 @@ export default function AccountForm({
   };
 
   return (
-    <form className={styles.form} onSubmit={onSubmit}>
+    // noValidate: our own messages (in the page's language) instead of the browser's bubbles.
+    <form className={styles.form} onSubmit={onSubmit} noValidate>
       <ProfileCard kicker={copy.kicker}>
         <div className={styles.grid}>
           <div className={styles.fields}>
-            <FormField label={copy.displayName} htmlFor="p-name">
+            <FormField
+              label={copy.displayName}
+              htmlFor="p-name"
+              error={nameError}
+              messageId="p-name-message"
+              required
+            >
               <Input
                 id="p-name"
                 value={draft}
                 onChange={(e) => {
                   setDraft(e.target.value);
+                  setNameError(null);
                   setState('idle');
                 }}
                 placeholder={copy.displayNamePlaceholder}
                 maxLength={DISPLAY_NAME_MAX}
-                autoComplete="nickname"
+                autoComplete="name"
+                required
+                invalid={!!nameError}
+                aria-describedby="p-name-message"
               />
             </FormField>
             <FormField
               label={copy.username}
               htmlFor="p-username"
               hint={copy.usernameHint}
-              messageId="p-username-hint"
+              error={usernameError}
+              messageId="p-username-message"
+              required
             >
               <Input
                 id="p-username"
-                value={username}
+                value={usernameDraft}
                 icon={icons.user}
-                readOnly
-                aria-describedby="p-username-hint"
+                onChange={(e) => {
+                  setUsernameDraft(e.target.value.replace(/[^A-Za-z0-9_-]/g, ''));
+                  setUsernameError(null);
+                  setState('idle');
+                }}
+                maxLength={USERNAME_MAX}
+                autoComplete="username"
+                autoCapitalize="none"
+                spellCheck={false}
+                required
+                invalid={!!usernameError}
+                aria-describedby="p-username-message"
               />
             </FormField>
           </div>

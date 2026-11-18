@@ -15,8 +15,8 @@ const users = () => getAdminDb().collection(envCollection('users'));
 
 const fail = (error: RiotLinkResult, status: number) => NextResponse.json({ error }, { status });
 
-export async function PATCH() {
-  const session = await requireSession();
+export async function PATCH(request: Request) {
+  const session = await requireSession(request);
   if (session instanceof NextResponse) return session;
 
   const ref = users().doc(session.user.id);
@@ -41,15 +41,17 @@ export async function PATCH() {
   );
   if (result.status === 'not_found') return fail('not_found', 404);
 
-  await ref.update({ riot: result.record });
+  await ref.update({ riot: result.record, updatedAt: FieldValue.serverTimestamp() });
   return NextResponse.json({ riot: await toRiotView(result.record) });
 }
 
-export async function DELETE() {
-  const session = await requireSession();
+export async function DELETE(request: Request) {
+  const session = await requireSession(request);
   if (session instanceof NextResponse) return session;
 
   const ref = users().doc(session.user.id);
-  if ((await ref.get()).exists) await ref.update({ riot: FieldValue.delete() });
+  if ((await ref.get()).exists) {
+    await ref.update({ riot: FieldValue.delete(), updatedAt: FieldValue.serverTimestamp() });
+  }
   return NextResponse.json({ riot: null });
 }
