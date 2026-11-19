@@ -13,8 +13,8 @@ export function usernameFromEmail(email: string | null | undefined): string {
   return local.replace(/[^A-Za-z0-9_-]/g, '').slice(0, USERNAME_MAX);
 }
 
-/** Sign-in and onboarding pages: never a destination after signing in (it would loop). */
-const AUTH_PATHS = ['/login', '/en/login', '/register'];
+/** Sign-in, onboarding and sign-out pages: never a callback destination (it would loop). */
+const AUTH_PATHS = ['/login', '/en/login', '/register', '/logout', '/en/logout'];
 
 /**
  * The 4HOPE domain. A callbackUrl may point at it or at any of its subdomains (the tools, e.g.
@@ -24,6 +24,21 @@ export const TRUSTED_DOMAIN = '4hope.app';
 
 const isTrustedHost = (hostname: string) =>
   hostname === TRUSTED_DOMAIN || hostname.endsWith(`.${TRUSTED_DOMAIN}`);
+
+/**
+ * Whether a URL (e.g. `document.referrer`) is a page of this site (`origin`) or an https page on
+ * 4hope.app or one of its subdomains. Empty or unparsable → false.
+ */
+export function isTrustedPage(url: string | null | undefined, origin: string): boolean {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    if (parsed.origin === origin) return true;
+    return parsed.protocol === 'https:' && !parsed.port && isTrustedHost(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
 
 /** Path with %-escapes decoded (so "/%6Cogin" counts as "/login"), lowercased, no trailing "/". */
 function normalizedPath(pathname: string): string {
