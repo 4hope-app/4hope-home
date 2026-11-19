@@ -271,6 +271,15 @@
       "loading": "Connecting to Google…",
       "error": "We couldn't sign you in with Google. Please try again."
     },
+    "logout": {
+      "title": "Sign out",
+      "lead": "You'll be signed out of 4HOPE and all its tools.",
+      "signingOut": "Signing you out…",
+      "confirm": "Sign out",
+      "retry": "Try again",
+      "cancel": "Go back",
+      "error": "We couldn't sign you out. Please try again."
+    },
     "register": {
       "title": "Welcome to the squad",
       "lead": "One last step — finish your profile to get in.",
