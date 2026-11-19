@@ -9,9 +9,13 @@
     "binding": "ASSETS",
   },
   "observability": { "enabled": true },
-  // Plain (non-secret) runtime vars. Declared here because `wrangler deploy` / `versions upload`
-  // drop text variables added in the dashboard; secrets (AUTH_*, FIREBASE_*, RIOT_*, APP_ENV)
-  // stay in the dashboard. Auth.js needs this outside Vercel or it fails with UntrustedHost.
+  // Keep the text variables set in the Cloudflare dashboard (e.g. APP_ENV). Without this,
+  // every `wrangler deploy` / `versions upload` (Workers Builds runs one on each push) treats
+  // this file as the full list of vars and deletes any dashboard var not declared below.
+  // Secrets (AUTH_*, FIREBASE_*, RIOT_*) are never touched either way.
+  "keep_vars": true,
+  // Plain (non-secret) runtime vars every version needs. Auth.js needs this outside Vercel or it
+  // fails with UntrustedHost.
   "vars": {
     "AUTH_TRUST_HOST": "true",
   },

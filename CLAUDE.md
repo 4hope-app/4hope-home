@@ -118,6 +118,7 @@ Node 22.6+ (`.nvmrc`). After changing code, run `npm run check`, `npm run lint` 
 ## Deploy
 
 - Cloudflare Workers via `@opennextjs/cloudflare` (`open-next.config.ts`, `wrangler.jsonc`). Pages aren't revalidated, so the incremental cache is the read-only static-assets cache; switch to R2 if ISR/`revalidate` is added.
+- **Keep `"keep_vars": true` in `wrangler.jsonc`.** Without it, every deploy (Workers Builds runs `wrangler deploy` / `versions upload` on each push) deletes the dashboard text variables not listed in `vars`, e.g. `APP_ENV`. Vars every version needs go in `vars` (`AUTH_TRUST_HOST`); environment-specific ones (`APP_ENV`) stay in the dashboard; secrets are never touched.
 - Headers: security headers for server responses in `next.config.ts`; cache + security headers for static files in `public/_headers`.
 
 ## Known open items
