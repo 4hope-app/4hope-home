@@ -6,7 +6,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Spinner from '@/components/ui/Spinner';
 import { buttonClass } from '@/components/ui/buttonClass';
 import type { Dictionary } from '@/i18n/utils';
-import { goToCallback, isTrustedPage, safeCallbackUrl } from '@/lib/profile';
+import { goToCallback, isTrustedPage, logoutDestination } from '@/lib/profile';
 import styles from '@/components/auth/auth.module.css';
 
 interface Props {
@@ -17,22 +17,28 @@ interface Props {
 
 /**
  * /logout?callbackUrl=<page>: signs out of 4HOPE (the shared session cookie, so every 4hope.app
- * tool too) and goes to `callbackUrl`, which may be a page on a 4hope.app subdomain
- * (e.g. https://bracket.4hope.app/). Tools send their "Sign out" here.
+ * tool too). Tools send their "Sign out" here.
+ *
+ * Afterwards it goes to `callbackUrl` only when the user came from bracket (the Referer) and the
+ * callback is a bracket page (`logoutDestination`); otherwise to the home page.
  *
  * Signing out on page load only happens when the user came from this site or a 4hope.app
- * subdomain (the Referer). From anywhere else (a link on another site, a typed URL) the page asks
- * first, so a third-party link can't sign people out.
+ * subdomain. From anywhere else (a link on another site, a typed URL) the page asks first, so a
+ * third-party link can't sign people out.
  */
 export default function LogoutForm({ copy, fallback }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = safeCallbackUrl(searchParams.get('callbackUrl'), fallback);
   // Read once on the client (this component only renders there: it sits under Suspense with
   // useSearchParams, so it isn't prerendered).
-  const [auto] = useState(
-    () => typeof document !== 'undefined' && isTrustedPage(document.referrer, location.origin),
-  );
+  const [{ auto, callbackUrl }] = useState(() => {
+    const referrer = typeof document !== 'undefined' ? document.referrer : '';
+    const origin = typeof location !== 'undefined' ? location.origin : '';
+    return {
+      auto: isTrustedPage(referrer, origin),
+      callbackUrl: logoutDestination(searchParams.get('callbackUrl'), referrer, fallback),
+    };
+  });
   const [state, setState] = useState<'signing-out' | 'confirm' | 'error'>(
     auto ? 'signing-out' : 'confirm',
   );

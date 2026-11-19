@@ -40,6 +40,34 @@ export function isTrustedPage(url: string | null | undefined, origin: string): b
   }
 }
 
+/** Tools whose "Sign out" may send users back to them after /logout. */
+export const LOGOUT_RETURN_HOSTS = ['bracket.4hope.app'];
+
+/**
+ * Where /logout goes after signing out. The callbackUrl is only followed when the user came from
+ * one of LOGOUT_RETURN_HOSTS (the Referer) and it points back at that same host; every other case
+ * (no Referer, this site, another subdomain, another site, a callback elsewhere) goes to
+ * `fallback`, the home page.
+ */
+export function logoutDestination(
+  callbackUrl: string | null | undefined,
+  referrer: string | null | undefined,
+  fallback: string,
+): string {
+  let from: URL;
+  try {
+    from = new URL(referrer ?? '');
+  } catch {
+    return fallback;
+  }
+  if (from.protocol !== 'https:' || from.port || !LOGOUT_RETURN_HOSTS.includes(from.hostname)) {
+    return fallback;
+  }
+  const target = safeCallbackUrl(callbackUrl, '');
+  if (!target || target.startsWith('/')) return fallback;
+  return new URL(target).hostname === from.hostname ? target : fallback;
+}
+
 /** Path with %-escapes decoded (so "/%6Cogin" counts as "/login"), lowercased, no trailing "/". */
 function normalizedPath(pathname: string): string {
   let path = pathname;
