@@ -271,6 +271,15 @@
       "loading": "Conectando con Google…",
       "error": "No pudimos iniciar sesión con Google. Inténtalo de nuevo."
     },
+    "logout": {
+      "title": "Cerrar sesión",
+      "lead": "Tu sesión se cierra en 4HOPE y en todas sus herramientas.",
+      "signingOut": "Cerrando sesión…",
+      "confirm": "Cerrar sesión",
+      "retry": "Intentar de nuevo",
+      "cancel": "Volver",
+      "error": "No pudimos cerrar tu sesión. Inténtalo de nuevo."
+    },
     "register": {
       "title": "Te damos la bienvenida al squad",
       "lead": "Un último paso: completa tu perfil para entrar.",
